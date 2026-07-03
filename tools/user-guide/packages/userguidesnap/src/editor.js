@@ -238,17 +238,19 @@
       const t = document.createElementNS(SVGNS, 'feTurbulence');
       t.setAttribute('type', 'fractalNoise'); t.setAttribute('baseFrequency', '0.007 0.011'); t.setAttribute('numOctaves', '3'); t.setAttribute('seed', '7'); t.setAttribute('result', 'n');
       const g = document.createElementNS(SVGNS, 'feGaussianBlur'); g.setAttribute('in', 'n'); g.setAttribute('stdDeviation', '1.8'); g.setAttribute('result', 'nb');
-      const d = document.createElementNS(SVGNS, 'feDisplacementMap'); d.setAttribute('in', 'SourceGraphic'); d.setAttribute('in2', 'nb'); d.setAttribute('xChannelSelector', 'R'); d.setAttribute('yChannelSelector', 'G');
-      f.append(t, g, d); defs.append(f);
+      const d = document.createElementNS(SVGNS, 'feDisplacementMap'); d.setAttribute('in', 'SourceGraphic'); d.setAttribute('in2', 'nb'); d.setAttribute('xChannelSelector', 'R'); d.setAttribute('yChannelSelector', 'G'); d.setAttribute('result', 'disp');
+      // frost the displaced backdrop INSIDE the filter — a plain backdrop blur() doesn't apply once a url() filter is chained
+      const fb = document.createElementNS(SVGNS, 'feGaussianBlur'); fb.setAttribute('in', 'disp'); fb.setAttribute('stdDeviation', '7');
+      f.append(t, g, d, fb); defs.append(f);
     }
     f.querySelector('feDisplacementMap').setAttribute('scale', scale);
   }
   function applyLiquid() {
-    const base = 'blur(3px) saturate(180%) brightness(1.03)';
+    const base = 'blur(20px) saturate(140%) brightness(1.02)';
     activeSlide().els.forEach((el) => {
       if (el.type !== 'callout') return;
       const node = canvas.querySelector(`[data-id="${el.id}"] .cmp-callout`); if (!node) return;
-      const lvl = el.liquid == null ? 115 : el.liquid;
+      const lvl = el.liquid == null ? 32 : el.liquid;
       let bf = base;
       if (lvl > 0) { ensureLiquidFilter(el.id, lvl); bf = `${base} url(#ugs-liq-${el.id})`; }
       node.style.backdropFilter = bf; node.style.webkitBackdropFilter = bf;

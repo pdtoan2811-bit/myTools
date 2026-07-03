@@ -124,11 +124,12 @@
 .cmp-callout { min-width:190px; max-width:380px; padding:20px 24px 21px; border-radius:26px;
   position:relative; isolation:isolate;
   font-family:'Inter',sans-serif; font-size:19.5px; line-height:1.5; font-weight:600; letter-spacing:-.014em; color:var(--ink);
-  text-shadow:0 1px 2px rgba(255,255,255,.55);   /* light legibility halo */
-  background:linear-gradient(152deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,.18) 100%);
-  /* Crystal Liquid Glass with just enough white to read solid; displacement url() added by applyLiquid() */
-  -webkit-backdrop-filter:blur(4px) saturate(185%) brightness(1.05);
-  backdrop-filter:blur(4px) saturate(185%) brightness(1.05);
+  background:linear-gradient(152deg, rgba(255,255,255,.91) 0%, rgba(255,255,255,.86) 100%);
+  /* Frosted Liquid Glass — a mostly-opaque white veil OBSCURES the content beneath so the callout
+     reads clean (backdrop blur() doesn't render once a url() displacement is chained, so the white
+     carries the hiding). The rim, gloss and chromatic edge keep it reading as glass, not a flat card. */
+  -webkit-backdrop-filter:blur(6px) saturate(150%) brightness(1.03);
+  backdrop-filter:blur(6px) saturate(150%) brightness(1.03);
   border:1.3px solid rgba(255,255,255,.92);
   box-shadow:
     inset 3.5px 3.5px 3px var(--ab-cool-strong),       /* thick cool refracted top-left edge */
