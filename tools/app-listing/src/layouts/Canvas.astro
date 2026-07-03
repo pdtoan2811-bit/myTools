@@ -1,0 +1,33 @@
+---
+/**
+ * Canvas — wraps a slide in one exact-pixel box (#canvas) that the export
+ * pipeline screenshots. Loads the site's real stylesheet + the canvas/freeze
+ * + composition layers, in that order.
+ */
+import '../styles/global.css';
+import '../styles/canvas.css';
+import '../styles/applisting.css';
+
+interface Props { width: number; height: number; }
+const { width, height } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <link rel="preload" href="/fonts/inter-vf-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/playfair-vf-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/playfair-italic-vf-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <style is:inline>
+      html, body { margin: 0; padding: 0; background: #fff; }
+      /* center the canvas when viewed directly (the editor iframe scales it) */
+      body { display: grid; place-items: start center; }
+    </style>
+  </head>
+  <body>
+    <div class="canvas" id="canvas" style={`width:${width}px;height:${height}px`}>
+      <slot />
+    </div>
+  </body>
+</html>

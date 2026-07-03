@@ -1,0 +1,36 @@
+# =============================================================================
+# myTools — the QDN workspace TOOLS repo.
+# Tracks: canonical tools/, workspace glue (workspace.json, CLAUDE.md, .claude/),
+# and each app-group's CLAUDE.md map stub.
+# Ignores: all app CONTENT — the app/website/guide source each lives in its OWN
+# repo on its own toan* branch, and is NOT part of this tools repo.
+# =============================================================================
+
+# ── App content — handled by their own repos & branches ──────────────────────
+/apps/*/app/
+/apps/*/website/
+/apps/*/guides/
+
+# ── Per-app tool working copies — synced from canonical via sync-tools.mjs ────
+/apps/*/tools/
+
+# ── Dependencies & build output ───────────────────────────────────────────────
+node_modules/
+dist/
+.astro/
+.turbo/
+.cache/
+
+# ── Tool-generated artifacts (regenerable) — keep jobs/*/job.json source specs ─
+exports/
+**/jobs/*/captures/
+**/jobs/*/assets/
+**/jobs/*/guide.json
+**/jobs/*/guide.md
+**/jobs/*/status.json
+
+# ── Secrets & OS cruft ────────────────────────────────────────────────────────
+.env
+.env.*
+!*.example
+.DS_Store

@@ -1,0 +1,262 @@
+/* =====================================================================
+   QSortby "Editorial Glass" tokens — lifted from the QSortby design-hub
+   (applisting.css / global.css) so guide images match the App-listing
+   style 1:1. Light + dark grounds, the glass primitive, window chrome.
+   ===================================================================== */
+:root {
+  --bg:#fcfcfa; --surface:#ffffff; --paper:#f6f6f4;
+  --ink:#17191e; --ink-2:#494d55; --muted:#7c818b; --faint:#a7abb2;
+  --line:#e8e7e4; --line-2:#dbdad6;
+  --green:#00a36b; --green-ink:#067a55; --green-bright:#2bd996;
+  --green-soft:#eef5f1; --green-line:#cbe8da;
+  --down:#c4392f;
+  --w-bg:#fff; --w-bar:#f7f8f9; --w-side:#fafbfc; --w-line:#e9eaed; --w-line-2:#eef0f2; --w-text:#101317; --w-mut:#7a818b;
+  --grad-mint:linear-gradient(180deg,#fbfbfa 0%,#f4f4f2 100%);
+  --shadow-float:0 1px 1px rgba(16,24,40,.04),0 8px 24px -12px rgba(16,24,40,.18),0 40px 80px -36px rgba(16,24,40,.22);
+  --mono:'JetBrains Mono','SF Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(.22,.61,.21,1);
+}
+
+/* ---- the slide ground: light (mint aurora + dotted grid) ---- */
+.ground-light, .ground-dark { position:absolute; inset:0; z-index:0; }
+.ground-light { background:
+    radial-gradient(60% 80% at 78% -10%, #f1fbf6 0%, transparent 60%),
+    radial-gradient(50% 70% at 12% 110%, #f3faf6 0%, transparent 55%), #ffffff; }
+.ground-light::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:
+    radial-gradient(38% 42% at 82% 2%, rgba(0,163,107,.20), transparent 66%),
+    radial-gradient(30% 36% at 98% 26%, rgba(43,217,150,.18), transparent 70%),
+    radial-gradient(34% 44% at 4% 8%, rgba(0,163,107,.10), transparent 70%); }
+.ground-light::after { content:""; position:absolute; inset:0; z-index:0; opacity:.5; pointer-events:none;
+    background-image:radial-gradient(rgba(16,24,40,.055) 1px, transparent 1px); background-size:26px 26px;
+    -webkit-mask-image:linear-gradient(150deg,#000 0%,transparent 72%); mask-image:linear-gradient(150deg,#000 0%,transparent 72%); }
+
+.ground-dark { background:
+    radial-gradient(70% 90% at 72% -16%, #11362a 0%, transparent 60%),
+    radial-gradient(60% 80% at 10% 116%, #0c2a21 0%, transparent 55%),
+    linear-gradient(160deg,#0b0e12 0%,#0e131a 60%,#0b1411 100%); }
+.ground-dark::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.9; background:
+    radial-gradient(40% 46% at 80% 6%, rgba(43,217,150,.34), transparent 64%),
+    radial-gradient(30% 38% at 100% 30%, rgba(0,163,107,.30), transparent 70%); }
+.ground-dark::after { content:""; position:absolute; inset:0; z-index:0; opacity:.5; pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px); background-size:26px 26px; }
+
+/* ---- glass primitive (engineered to read on white) ---- */
+.glass { position:relative; isolation:isolate;
+  background:linear-gradient(150deg, rgba(255,255,255,.62), rgba(255,255,255,.34));
+  -webkit-backdrop-filter:blur(22px) saturate(175%); backdrop-filter:blur(22px) saturate(175%);
+  border:1px solid rgba(255,255,255,.75); border-radius:18px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 0 rgba(16,24,40,.05),
+    0 2px 6px rgba(16,24,40,.06), 0 26px 50px -22px rgba(16,24,40,.30), 0 40px 80px -40px rgba(0,140,95,.34); }
+.glass.on-dark { background:linear-gradient(150deg, rgba(255,255,255,.16), rgba(255,255,255,.05));
+  border-color:rgba(255,255,255,.28);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.32), inset 0 -1px 0 rgba(0,0,0,.2),
+    0 30px 60px -24px rgba(0,0,0,.6), 0 30px 70px -30px rgba(0,163,107,.5); }
+
+/* ---- eyebrow / headline / step chip (slide caption) ---- */
+.eye { display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:12.5px; font-weight:700;
+  letter-spacing:.13em; text-transform:uppercase; color:var(--green-ink); background:rgba(255,255,255,.72);
+  border:1px solid var(--green-line); border-radius:999px; padding:8px 14px; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); }
+.eye .dot { width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 0 3px var(--green-soft); }
+.head { font-family:'Inter',sans-serif; font-weight:700; letter-spacing:-.038em; color:var(--ink); margin:0; line-height:1.07; }
+.head em { font-style:normal; color:var(--green-ink); }
+.head .pf { font-family:'Playfair Display',serif; font-style:italic; font-weight:600; letter-spacing:-.01em; }
+.sub { color:var(--ink-2); line-height:1.52; margin:0; }
+.step-chip { display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:13px; font-weight:700;
+  color:var(--muted); background:rgba(255,255,255,.82); border:1px solid var(--line-2); border-radius:999px; padding:8px 15px;
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); }
+.step-chip b { color:var(--green-ink); }
+.on-dark-ink { color:#fff !important; } .on-dark-mut { color:rgba(255,255,255,.7) !important; }
+.eye.on-dark { background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.2); color:var(--green-bright); }
+.head.on-dark { color:#fff; } .head.on-dark em { color:var(--green-bright); }
+.step-chip.on-dark { background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.2); color:rgba(255,255,255,.7); }
+.step-chip.on-dark b { color:var(--green-bright); }
+
+/* ---- screenshot frame chrome: browser + app window ---- */
+.shot { position:relative; display:flex; flex-direction:column; background:#fff; border:1px solid var(--w-line); border-radius:16px; overflow:hidden;
+  box-shadow:0 2px 6px rgba(16,24,40,.06), 0 40px 90px -42px rgba(16,24,40,.42); }
+.shot .chrome { flex:none; display:flex; align-items:center; gap:9px; padding:13px 16px; border-bottom:1px solid var(--w-line); background:var(--w-bar); }
+.shot .chrome > i { width:11px; height:11px; border-radius:50%; background:#d6d9dd; display:block; }
+.shot .chrome .url { margin:0 auto; display:inline-flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--line);
+  border-radius:8px; padding:6px 16px; font-family:var(--mono); font-size:12px; color:var(--muted); max-width:62%;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+/* crop viewport: the screenshot is a cover image we can pan/zoom inside this box */
+.shot .shot-body { position:relative; flex:1; min-height:0; overflow:hidden; background:var(--grad-mint); }
+.shot .shot-crop { position:absolute; left:0; top:0; max-width:none; user-select:none; -webkit-user-drag:none; }
+.shot.plain { border-radius:14px; }
+.shot.plain .chrome { display:none; }
+/* active crop mode */
+.el.cropping .shot { box-shadow:0 0 0 2px var(--green), 0 40px 90px -42px rgba(16,24,40,.42); }
+.el.cropping .shot-body { cursor:grab; }
+.el.cropping .shot-body:active { cursor:grabbing; }
+.crop-hint { position:absolute; left:8px; bottom:8px; z-index:5; font-family:var(--mono); font-size:10px; font-weight:700;
+  letter-spacing:.05em; text-transform:uppercase; color:#fff; background:var(--green); padding:4px 9px; border-radius:6px;
+  box-shadow:0 4px 10px -4px rgba(0,0,0,.4); pointer-events:none; }
+
+/* contact shadow so a shot never floats in blank space */
+.ground-shadow::after { content:""; position:absolute; left:8%; right:8%; bottom:-26px; height:40px; border-radius:50%;
+  background:radial-gradient(closest-side, rgba(16,24,40,.28), transparent 73%); filter:blur(14px); z-index:-1; }
+
+/* =====================================================================
+   GUIDING COMPONENTS (the annotation kit) — all QSortby-styled.
+   ===================================================================== */
+/* number step badge — liquid glass bead */
+.cmp-badge { position:relative; overflow:hidden; width:38px; height:38px; border-radius:50%; display:grid; place-items:center;
+  font-family:var(--mono); font-weight:700; font-size:16px; color:#fff;
+  background:linear-gradient(140deg, var(--green-bright), var(--green));
+  box-shadow:0 2px 6px rgba(16,24,40,.18), 0 10px 22px -8px rgba(0,163,107,.55),
+    inset 0 1.5px 1px rgba(255,255,255,.7), inset 0 -3px 6px rgba(0,80,55,.32);
+  border:2px solid rgba(255,255,255,.9); }
+.cmp-badge > span { position:relative; z-index:2; }
+.cmp-badge::before { content:""; position:absolute; left:16%; right:16%; top:7%; height:40%; border-radius:50%; z-index:1; pointer-events:none;
+  background:linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,0)); filter:blur(.4px); }
+
+/* ---- premium glass callout ---------------------------------------------
+   Editorial-glass card: deep frosted blur, specular sheen, bright top rim,
+   layered elevation, and larger Inter copy with a tracked mono kicker. */
+.cmp-callout { min-width:170px; max-width:360px; padding:18px 21px 19px; border-radius:24px;
+  position:relative; isolation:isolate;
+  font-family:'Inter',sans-serif; font-size:17px; line-height:1.5; font-weight:500; letter-spacing:-.012em; color:var(--ink);
+  background:linear-gradient(152deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.28) 100%);
+  /* Liquid Glass base clarity; the per-callout displacement url() is added by applyLiquid() */
+  -webkit-backdrop-filter:blur(7px) saturate(190%) brightness(1.06);
+  backdrop-filter:blur(7px) saturate(190%) brightness(1.06);
+  border:1px solid rgba(255,255,255,.5);
+  box-shadow:
+    inset 1.6px 1.6px 1px rgba(255,255,255,.8),       /* top-left lens edge */
+    inset -1.4px -1.4px 1px rgba(255,255,255,.4),      /* bottom-right lens edge */
+    inset 0 0 26px rgba(255,255,255,.14),              /* inner glow / thickness */
+    0 2px 6px rgba(16,24,40,.06),
+    0 24px 50px -22px rgba(16,24,40,.34),
+    0 40px 80px -44px rgba(0,140,95,.28); }
+/* glossy specular sweep (the wet top highlight) */
+.cmp-callout::before { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:2;
+  background:
+    radial-gradient(120% 80% at 22% -10%, rgba(255,255,255,.6), rgba(255,255,255,0) 46%),
+    linear-gradient(125deg, rgba(255,255,255,.5) 0%, rgba(255,255,255,0) 32%, rgba(255,255,255,0) 66%, rgba(255,255,255,.24) 100%); }
+/* bright top-edge rim */
+.cmp-callout::after { content:""; position:absolute; left:14%; right:14%; top:0; height:1px; border-radius:1px; pointer-events:none; z-index:2;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.95), transparent); }
+.cmp-callout > * { position:relative; z-index:1; }
+
+/* size variants */
+.cmp-callout.sz-s { font-size:15px; padding:15px 18px 16px; border-radius:21px; }
+.cmp-callout.sz-l { font-size:20px; line-height:1.45; padding:22px 25px 23px; border-radius:28px; }
+
+/* kicker: tracked mono label with a live dot */
+.cmp-callout .ck { display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11px; font-weight:700;
+  letter-spacing:.15em; text-transform:uppercase; color:var(--green-ink); margin:0 0 11px; }
+.cmp-callout .ck::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--green);
+  box-shadow:0 0 0 3px var(--green-soft); flex:none; }
+.cmp-callout.sz-l .ck { font-size:12px; margin-bottom:13px; }
+.cmp-callout .ctext { display:block; }
+
+/* accent: green-tinted liquid glass */
+.cmp-callout.accent { border-color:rgba(203,232,218,.7);
+  background:linear-gradient(152deg, rgba(240,251,246,.5) 0%, rgba(255,255,255,.26) 100%);
+  box-shadow:
+    inset 1.6px 1.6px 1px rgba(255,255,255,.82),
+    inset -1.4px -1.4px 1px rgba(255,255,255,.42),
+    inset 0 0 26px rgba(0,163,107,.1),
+    0 2px 6px rgba(16,24,40,.06),
+    0 24px 50px -22px rgba(0,163,107,.32),
+    0 40px 80px -44px rgba(0,140,95,.4); }
+
+/* dark-ground liquid glass */
+.cmp-callout.on-dark { color:#fff; border-color:rgba(255,255,255,.22);
+  background:linear-gradient(152deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.04) 100%);
+  box-shadow:
+    inset 1.6px 1.6px 1px rgba(255,255,255,.5),
+    inset -1.4px -1.4px 1px rgba(255,255,255,.2),
+    inset 0 0 30px rgba(255,255,255,.08),
+    0 30px 60px -24px rgba(0,0,0,.6),
+    0 36px 76px -34px rgba(0,163,107,.46); }
+.cmp-callout.on-dark .ck { color:var(--green-bright); }
+.cmp-callout.on-dark .ck::before { box-shadow:0 0 0 3px rgba(0,163,107,.28); }
+
+/* step badge anchored to a callout's top-left corner (moves with the callout) */
+.cmp-callout-step { position:absolute; top:-18px; left:-18px; z-index:4; width:36px; height:36px; font-size:15px; }
+/* subtle hover affordance to add / remove the callout's step number */
+.cstep-toggle { position:absolute; top:-13px; right:-8px; z-index:6; opacity:0; transform:translateY(3px);
+  font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:.03em; padding:4px 9px; border-radius:999px;
+  border:1px solid var(--line-2); background:#fff; color:var(--muted); cursor:pointer; box-shadow:var(--shadow-float);
+  transition:opacity .14s var(--ease), transform .14s var(--ease); white-space:nowrap; }
+.el:hover .cstep-toggle { opacity:1; transform:translateY(0); }
+.cstep-toggle:hover { border-color:var(--green-line); color:var(--green-ink); background:var(--green-soft); }
+
+.ugs-defs { position:absolute; width:0; height:0; overflow:hidden; pointer-events:none; }
+
+/* highlight / spotlight box */
+.cmp-highlight { border:2.5px solid var(--green); border-radius:12px; background:rgba(0,163,107,.06);
+  box-shadow:0 0 0 4px rgba(0,163,107,.12), 0 14px 30px -14px rgba(0,163,107,.4); }
+
+/* pill label — liquid gloss */
+.cmp-pill { display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:12px; font-weight:700;
+  letter-spacing:.02em; color:#fff; padding:7px 13px; border-radius:999px; white-space:nowrap;
+  background:linear-gradient(180deg, rgba(255,255,255,.24), rgba(255,255,255,0) 52%), var(--ink);
+  box-shadow:0 6px 16px -8px rgba(16,24,40,.5), inset 0 1px 0 rgba(255,255,255,.4), inset 0 -2px 4px rgba(0,0,0,.22); }
+.cmp-pill.green { background:linear-gradient(180deg, rgba(255,255,255,.3), rgba(255,255,255,0) 52%), var(--green);
+  box-shadow:0 6px 16px -8px rgba(0,163,107,.5), inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 4px rgba(0,80,55,.3); }
+
+/* blur redaction patch */
+.cmp-blur { border-radius:8px; -webkit-backdrop-filter:blur(9px); backdrop-filter:blur(9px);
+  background:rgba(220,222,226,.25); border:1px solid rgba(255,255,255,.4); }
+
+/* magnifier / loupe — shows the screenshot area beneath it, enlarged */
+.cmp-mag { width:100%; height:100%; position:relative; border-radius:50%; overflow:hidden;
+  border:4px solid rgba(255,255,255,.92);
+  box-shadow:0 0 0 2px var(--green),
+    inset 2px 2px 2px rgba(255,255,255,.7), inset -2px -2px 2px rgba(255,255,255,.32),
+    inset 0 -8px 18px rgba(16,24,40,.18),
+    0 20px 44px -16px rgba(0,163,107,.5), 0 12px 26px -10px rgba(16,24,40,.38); }
+.cmp-mag.rect { border-radius:18px; }
+.cmp-mag .mag-lens { position:absolute; inset:0; background-repeat:no-repeat; background-color:#fff; }
+.cmp-mag .mag-empty { position:absolute; inset:0; display:grid; place-items:center; text-align:center; padding:0 10px;
+  font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:.04em; color:var(--muted); background:var(--grad-mint); }
+/* glass sheen + inner rim */
+.cmp-mag::after { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:2;
+  background:
+    radial-gradient(78% 60% at 28% 16%, rgba(255,255,255,.6), rgba(255,255,255,0) 52%),
+    linear-gradient(135deg, rgba(255,255,255,.34), rgba(255,255,255,0) 46%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.5); }
+
+/* ---- connector (anchored, re-routing arrow) ---- */
+.cmp-connector { position:absolute; inset:0; pointer-events:none; }
+.cmp-connector svg { position:absolute; left:0; top:0; overflow:visible; }
+.cmp-connector path.hit { stroke:transparent; stroke-width:18; fill:none; pointer-events:stroke; cursor:pointer; }
+.cmp-connector path.line { fill:none; stroke:var(--green); stroke-linecap:round; stroke-linejoin:round;
+  filter:drop-shadow(0 5px 10px rgba(0,163,107,.32)); }
+.cmp-connector polygon.cap { fill:var(--green); filter:drop-shadow(0 4px 8px rgba(0,163,107,.32)); }
+.cmp-connector circle.dot { fill:var(--green); stroke:#fff; stroke-width:2.5; filter:drop-shadow(0 3px 6px rgba(0,163,107,.3)); }
+/* the full-canvas wrapper must NOT block clicks on elements beneath it;
+   only the line (path.hit, stroke) and endpoint handles (auto) stay interactive */
+.el.connector { outline:none !important; pointer-events:none; }
+.el.connector.selected .cmp-connector path.line { stroke:var(--green-ink); }
+.el.connector .handle { display:none; }
+/* draggable endpoint handles (re-aim a connector) */
+.conn-end { position:absolute; width:15px; height:15px; border-radius:50%; background:#fff; border:2.5px solid var(--green);
+  box-shadow:0 2px 6px rgba(16,24,40,.32); transform:translate(-50%,-50%); cursor:grab; pointer-events:auto; display:none; z-index:8; }
+.conn-end:hover { border-color:var(--green-ink); }
+.conn-end:active { cursor:grabbing; }
+.el.connector.selected .conn-end { display:block; }
+body.render .conn-end { display:none !important; }
+
+/* invisible anchor target — editor-only decoration, never exported */
+.cmp-anchor { position:relative; width:100%; height:100%; }
+.cmp-anchor::before { content:""; position:absolute; inset:0; border-radius:50%; border:1.5px dashed var(--green); background:rgba(0,163,107,.08); }
+.cmp-anchor::after { content:""; position:absolute; left:50%; top:50%; width:5px; height:5px; transform:translate(-50%,-50%); border-radius:50%; background:var(--green); }
+body.render .cmp-anchor::before, body.render .cmp-anchor::after { display:none !important; }
+
+/* drag-to-connect handle on callouts / badges / highlights */
+.link-handle { position:absolute; right:-11px; top:50%; transform:translateY(-50%); z-index:7;
+  width:20px; height:20px; border-radius:50%; cursor:crosshair; background:var(--green); border:2px solid #fff;
+  box-shadow:0 3px 8px -2px rgba(0,163,107,.6); opacity:0; display:grid; place-items:center; color:#fff; font-size:11px; line-height:1;
+  transition:opacity .14s var(--ease); }
+.el:hover .link-handle, .el.selected .link-handle { opacity:1; }
+.link-handle:hover { transform:translateY(-50%) scale(1.15); }
+body.render .link-handle { display:none !important; }
+
+/* free arrow (svg) */
+.cmp-arrow { overflow:visible; }
+.cmp-arrow path, .cmp-arrow line { stroke:var(--green); stroke-width:5; fill:none; stroke-linecap:round; stroke-linejoin:round;
+  filter:drop-shadow(0 6px 12px rgba(0,163,107,.35)); }
+.cmp-arrow .head { fill:var(--green); stroke:none; }

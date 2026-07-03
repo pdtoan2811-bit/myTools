@@ -1,0 +1,12 @@
+---
+/** Placeholder QSortby logo (ascending bars). Swap public/brand/logo when the real mark lands. */
+import Mark from './Mark.astro';
+interface Props { mark?: number; wordmark?: boolean; sub?: string | false; dark?: boolean; }
+const { mark = 44, wordmark = true, sub = 'Smart collection sorting', dark = false } = Astro.props;
+---
+<span class="lock">
+  <Mark size={mark} tone={dark ? 'light' : 'dark'} />
+  {wordmark && (
+    <span class="wm" style={dark ? 'color:#fff' : ''}>QSortby{sub && <small>{sub}</small>}</span>
+  )}
+</span>

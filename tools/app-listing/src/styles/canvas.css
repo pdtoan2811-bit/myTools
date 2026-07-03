@@ -1,0 +1,24 @@
+/* ============================================================
+   Canvas mode — deterministic rendering for screenshot export.
+   Loaded AFTER global.css so these win on overlap.
+   ============================================================ */
+:root {
+  /* backfill vars global.css references but defines outside the stylesheet */
+  --mono: 'Inter', system-ui, -apple-system, sans-serif;
+  --d-bg: #0b0e12;
+}
+
+html, body { margin: 0; padding: 0 !important; background: #fff; }
+body { -webkit-font-smoothing: antialiased; }
+
+/* the export target — one exact-pixel canvas per slide */
+.canvas { position: relative; overflow: hidden; background: #fff; }
+
+/* settle entrance states that global.css starts hidden (no app.js here) */
+.appshot, .rv { opacity: 1 !important; transform: none !important; }
+
+/* kill every looping/entrance animation so each screenshot is identical */
+.canvas *, .canvas *::before, .canvas *::after {
+  animation: none !important;
+  animation-duration: 0s !important;
+}

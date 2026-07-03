@@ -1,0 +1,57 @@
+---
+import Frame from '../components/Frame.astro';
+import Metric from '../components/Metric.astro';
+import AppTag from '../components/AppTag.astro';
+
+const curve = 'M20 190 C110 178,165 198,255 160 C345 122,405 150,505 126 C605 102,665 130,765 86 C865 46,915 78,980 48';
+---
+<Frame eyebrow="Real-time, every few minutes" step="02">
+  <Fragment slot="head">Catch every trend <em>while it's hot</em>.</Fragment>
+  <Fragment slot="sub">A product starts spiking, QSortby notices within minutes and moves it up — your storefront rides the wave instead of promoting last week's winner.</Fragment>
+
+  <div style="position:relative;height:100%;">
+    <div class="bloom m" style="width:520px;height:320px;right:40px;top:0;"></div>
+
+    <div style="position:absolute;left:0;top:6px;"><AppTag status='Insights · <b>re-ranked 2 min ago</b>' /></div>
+
+    <!-- the trending product -->
+    <div class="sp lead" style="position:absolute;left:96px;top:150px;width:286px;z-index:3;">
+      <div class="spim">
+        <span class="spb">Trending</span>
+        <span class="spd"><span class="dchip up">↑9</span></span>
+        <img src="/products/fashion-tote.png" alt="" />
+      </div>
+      <div class="spname"><span class="spnum">#1</span>Leather Tote</div>
+      <div class="sprow"><span class="spp">$185</span><span class="sprate">★ 4.8</span></div>
+    </div>
+
+    <!-- analyst card frosting over the product -->
+    <div class="glass insight" style="position:absolute;left:60px;top:286px;z-index:6;">
+      <div class="il"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block"></span> Demand surge</div>
+      <div class="iv">Sales <b>↑ 40%</b> today</div>
+      <div class="is">caught & re-ranked in 4 min</div>
+    </div>
+
+    <!-- the live data viz -->
+    <div style="position:absolute;left:470px;top:150px;width:760px;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:22px;padding:22px 26px 16px;box-shadow:0 1px 2px rgba(16,24,40,.05),0 36px 70px -36px rgba(16,24,40,.3);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);z-index:2;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="font-weight:600;font-size:17px;color:var(--ink);">Orders / hour <span style="font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500;">· Leather Tote</span></div>
+        <span style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--green-ink);">↑ +40% · live</span>
+      </div>
+      <div class="echart">
+        <svg viewBox="0 0 1000 230" preserveAspectRatio="none">
+          <defs><linearGradient id="er" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#00a36b" stop-opacity=".18"/><stop offset="1" stop-color="#00a36b" stop-opacity="0"/></linearGradient></defs>
+          <line class="gln" x1="10" y1="62" x2="990" y2="62"/><line class="gln" x1="10" y1="124" x2="990" y2="124"/><line class="gln" x1="10" y1="186" x2="990" y2="186"/>
+          <path class="f" fill="url(#er)" d={`${curve} L980 210 L20 210 Z`}/>
+          <path class="line" d={curve} vector-effect="non-scaling-stroke"/>
+        </svg>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:8px;">
+        <span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span style="color:var(--green-ink);font-weight:700;">now</span>
+      </div>
+    </div>
+
+    <!-- live stat over the chart -->
+    <div style="position:absolute;right:130px;top:120px;z-index:6;"><Metric label="Orders · last hour" value="53" up="↑ 14%" sub="updates every 5 min" live /></div>
+  </div>
+</Frame>

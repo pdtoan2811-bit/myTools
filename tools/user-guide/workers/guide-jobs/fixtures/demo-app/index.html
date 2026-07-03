@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Demo App — Sort rules</title>
+<style>
+  body{margin:0;font-family:-apple-system,Inter,sans-serif;background:#f6f7f9;color:#17191e}
+  .top{display:flex;align-items:center;gap:10px;padding:14px 22px;background:#fff;border-bottom:1px solid #e9eaed}
+  .mk{width:22px;height:22px;border-radius:6px;background:linear-gradient(140deg,#2bd996,#00a36b)}
+  .top b{font-size:15px}.top .sp{flex:1}.top .u{font-size:13px;color:#7a818b}
+  .wrap{display:grid;grid-template-columns:200px 1fr;min-height:calc(100vh - 50px)}
+  .side{background:#fafbfc;border-right:1px solid #e9eaed;padding:16px 12px}
+  .nav{padding:9px 12px;border-radius:8px;font-size:13.5px;color:#7a818b;margin-bottom:3px}
+  .nav.on{background:#eef5f1;color:#067a55;font-weight:600}
+  .main{padding:28px 32px}
+  h1{font-size:22px;margin:0 0 4px}.sub{color:#7a818b;font-size:13px;margin-bottom:22px}
+  .card{background:#fff;border:1px solid #e9eaed;border-radius:12px;padding:20px 22px;max-width:560px}
+  label{display:block;font-size:12px;font-weight:600;color:#494d55;margin:14px 0 6px}
+  select,input{width:100%;padding:10px 12px;border:1px solid #dbdad6;border-radius:8px;font-size:14px}
+  .btn{margin-top:18px;background:#00a36b;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-weight:600;cursor:pointer}
+</style></head><body>
+<div class="top"><span class="mk"></span><b>Demo Store Admin</b><span class="sp"></span><span class="u">acme-store.myshopify.com</span></div>
+<div class="wrap">
+  <div class="side">
+    <div class="nav">Home</div><div class="nav">Products</div>
+    <div class="nav on">Sort rules</div><div class="nav">Collections</div><div class="nav">Settings</div>
+  </div>
+  <div class="main">
+    <h1>Sort rules</h1><div class="sub">Choose how this collection is ordered.</div>
+    <div class="card">
+      <label>Sort strategy</label>
+      <select id="sort-strategy"><option>Best sellers</option><option>Newest</option><option>Revenue</option><option>Custom blend</option></select>
+      <label>Update frequency</label>
+      <select id="update-frequency"><option>Live</option><option>Hourly</option><option>Daily</option></select>
+      <button class="btn" id="save-apply">Save &amp; apply</button>
+    </div>
+  </div>
+</div></body></html>

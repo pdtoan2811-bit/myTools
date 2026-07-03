@@ -1,0 +1,36 @@
+---
+/**
+ * Product card — the real-world hero of each slide. Image-led, with an optional
+ * badge, rank chip, price and a sales-bar so the stat rides on the product.
+ */
+interface Props {
+  slug: string;
+  name: string;
+  price?: string;
+  sold?: number;
+  pct?: number;            // sales-bar fill 0–100
+  badge?: { kind: 'best' | 'pin' | 'sold' | 'new' | 'ghost'; text: string };
+  rank?: string;
+  variant?: 'hero' | 'dim' | 'sold' | '';
+  width?: number;
+  stamp?: boolean;         // sold-out stamp across the image
+}
+const { slug, name, price, sold, pct, badge, rank, variant = '', width = 200, stamp = false } = Astro.props;
+const pinSvg = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 4h6l-1 7 4 3v2H6v-2l4-3-1-7z"/></svg>';
+---
+<div class={`pc ${variant}`} style={`width:${width}px`}>
+  <div class="pim">
+    {badge && <span class={`pbadge ${badge.kind}`} set:html={(badge.kind === 'pin' ? pinSvg : '') + badge.text}></span>}
+    {rank && <span class="prank">{rank}</span>}
+    {stamp && <span class="stamp"><span>Sold out</span></span>}
+    <img src={`/products/${slug}.png`} alt={name} />
+  </div>
+  <div class="pmeta">
+    <div class="pn">{name}</div>
+    <div class="prow">
+      {price && <span class="pp">{price}</span>}
+      {sold != null && <span class="psold">{sold} sold</span>}
+    </div>
+    {pct != null && <div class="pbar"><i style={`width:${pct}%`}></i></div>}
+  </div>
+</div>

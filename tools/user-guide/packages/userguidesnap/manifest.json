@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "userGuideSnap",
+  "version": "0.1.0",
+  "description": "Snap your app, drop pre-designed guiding components, and export branded user-guide images.",
+  "permissions": ["activeTab", "tabs", "storage", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_title": "Snap for userGuideSnap",
+    "default_popup": "src/popup.html"
+  },
+  "background": { "service_worker": "src/background.js" },
+  "commands": {
+    "capture": {
+      "suggested_key": { "default": "Alt+Shift+S" },
+      "description": "Capture visible tab into the current guide"
+    }
+  }
+}

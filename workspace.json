@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "root": "/Users/thomas/qdn",
+  "repo": {
+    "remote": "pdtoan2811-bit/myTools",
+    "branch": "main",
+    "role": "The workspace root IS the 'myTools' repo — it tracks canonical tools/ and workspace glue (workspace.json, CLAUDE.md, .claude/commands). App CONTENT (apps/*/{app,website,guides}) is git-ignored here; each lives in its own repo on its own toan* branch. Per-app tool copies (apps/*/tools) are ignored too — regenerate with sync-tools.mjs."
+  },
+  "conventions": {
+    "layout": "apps/<app>/{app,website,guides,tools}  +  tools/<canonical-tool>",
+    "toolModel": "Canonical tool lives in tools/<tool>; each app gets a synced working copy in apps/<app>/tools/<tool>. Edit canonical, then run tools/sync-tools.mjs.",
+    "identity": "Every repo carries a CLAUDE.md whose first line states repo + branch + role, because the folder names have historically misled."
+  },
+  "tools": {
+    "app-listing": {
+      "path": "tools/app-listing",
+      "git": "tracked in the myTools repo (pdtoan2811-bit/myTools)",
+      "purpose": "Listing Studio — Shopify App Store listing graphics (Astro + Playwright). Skill: applisting-design."
+    },
+    "user-guide": {
+      "path": "tools/user-guide",
+      "git": "tracked in the myTools repo (pdtoan2811-bit/myTools)",
+      "purpose": "userGuideSnap — user-guide factory; captures a localhost app, renders annotated screenshots, publishes .mdx into each app's guide repo. Skill: guide."
+    }
+  },
+  "apps": {
+    "qsortby": {
+      "aka": ["qsense", "QSortby"],
+      "parts": {
+        "app":     { "path": "apps/qsortby/app",     "repo": "qdndigital/qsense",       "branch": "toanQsenseApp",    "role": "Remix/turbo monorepo — the ACTUAL app (dashboard/admin/api/intelligence)" },
+        "website": { "path": "apps/qsortby/website", "repo": "qdndigital/qsortby-web",   "branch": "toanWebsite",      "role": "Astro marketing website" },
+        "guides":  { "path": "apps/qsortby/guides",  "repo": "qdndigital/qsortby-guide", "branch": "guide/quickstart", "role": "Astro docs/guide hub (publish target of the user-guide tool)" }
+      },
+      "tools": {
+        "app-listing": "apps/qsortby/tools/app-listing",
+        "user-guide":  "apps/qsortby/tools/user-guide"
+      },
+      "fork": { "path": "~/qdnQsense", "repo": "pdtoan2811-bit/qsortby", "note": "personal fork of the app; NOT copied into ~/qdn — registered for reference only" }
+    }
+  },
+  "legacyPaths": {
+    "_comment": "Old flat ~/ checkouts, superseded by ~/qdn. Safe to DELETE once you've verified the copies.",
+    "~/QSortby-website": "→ apps/qsortby/app  (the qsense monorepo; design-hub/ and .claude/ were intentionally NOT copied)",
+    "~/qdnNewWebsite": "→ apps/qsortby/website",
+    "~/qdnGuides/qsortby-guide": "→ apps/qsortby/guides",
+    "~/appListingTools": "→ tools/app-listing",
+    "~/userGuideTools": "→ tools/user-guide"
+  }
+}

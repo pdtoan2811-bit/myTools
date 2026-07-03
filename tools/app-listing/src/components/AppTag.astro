@@ -1,0 +1,16 @@
+---
+/**
+ * Slim app "tag" — a low-weight nod to the QSortby dashboard so the slide reads
+ * as app-powered without the dashboard dominating. Glass, kept in 2D.
+ */
+import Mark from './Mark.astro';
+interface Props { status: string; live?: boolean; dark?: boolean; }
+const { status, live = true, dark = false } = Astro.props;
+---
+<div class={`apptag${dark ? ' on-dark' : ''}`}>
+  <span class="dots"><i></i><i></i><i></i></span>
+  <Mark size={19} tone={dark ? 'light' : 'dark'} />
+  <b>QSortby</b>
+  <span class="st" set:html={status}></span>
+  {live && <span class="lv"><i></i> live</span>}
+</div>

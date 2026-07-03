@@ -1,0 +1,69 @@
+---
+import Frame from '../components/Frame.astro';
+import AppTag from '../components/AppTag.astro';
+
+// The SAME four products, reordered per segment — coherence comes from the shared set.
+const segments = [
+  {
+    who: 'New visitors', when: 'first-time shopper', rule: 'Best sellers', aov: '$76', tag: 'Best seller',
+    rows: [
+      { slug: 'aurora-sneaker', name: 'Aurora Sneaker', price: '$128' },
+      { slug: 'fashion-denim',  name: 'Selvedge Denim', price: '$120' },
+      { slug: 'fashion-tote',   name: 'Leather Tote',   price: '$185' },
+      { slug: 'fashion-trench', name: 'Cotton Trench',  price: '$210' },
+    ],
+  },
+  {
+    who: 'VIP segment', when: 'returning · loyal', rule: 'Trending for VIPs', aov: '$128', aovUp: true, tag: 'Trending',
+    rows: [
+      { slug: 'fashion-tote',   name: 'Leather Tote',   price: '$185', d: '2', c: 'up' },
+      { slug: 'fashion-trench', name: 'Cotton Trench',  price: '$210', d: '2', c: 'up' },
+      { slug: 'aurora-sneaker', name: 'Aurora Sneaker', price: '$128', d: '2', c: 'dn' },
+      { slug: 'fashion-denim',  name: 'Selvedge Denim', price: '$120', d: '2', c: 'dn' },
+    ],
+  },
+];
+---
+<Frame eyebrow="Per-collection & per-segment rules" step="05">
+  <Fragment slot="head">The right order for <em>every audience</em>.</Fragment>
+  <Fragment slot="sub">Same collection, merchandised per shopper — new visitors lead with proven best sellers, loyal customers lead with what's trending for them.</Fragment>
+
+  <div style="position:relative;height:100%;">
+    <div class="bloom m" style="width:560px;height:300px;left:50%;margin-left:-280px;top:-6px;"></div>
+
+    <div style="position:absolute;left:0;top:6px;"><AppTag status='Collection rules · <b>6 segments live</b>' live={false} /></div>
+
+    <div style="position:absolute;left:0;right:0;top:150px;display:flex;justify-content:center;gap:40px;">
+      {segments.map((s) => (
+        <div class="glass" style="width:404px;padding:18px 20px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:0 2px 13px;border-bottom:1px solid var(--line);">
+            <div>
+              <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:16px;letter-spacing:-.02em;color:var(--ink);">{s.who}</div>
+              <div style="font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-top:4px;">{s.when}</div>
+            </div>
+            <span style="font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--green-ink);background:var(--green-soft);border:1px solid var(--green-line);border-radius:999px;padding:7px 12px;">{s.rule}</span>
+          </div>
+
+          {s.rows.map((r, i) => (
+            <div style={`display:grid;grid-template-columns:24px 48px 1fr auto;align-items:center;gap:13px;padding:9px 2px;${i > 0 ? 'border-top:1px solid var(--line);' : ''}${i === 0 ? 'background:var(--green-soft);border-radius:11px;margin:6px -6px 0;padding-left:8px;padding-right:8px;' : ''}`}>
+              <span style={`font-family:var(--mono);font-weight:700;font-size:13.5px;color:${i === 0 ? 'var(--green-ink)' : 'var(--muted)'};text-align:center;`}>{i + 1}</span>
+              <span style="width:48px;height:48px;border-radius:11px;overflow:hidden;border:1px solid var(--w-line);background:#f1f5f2;display:block;"><img src={`/products/${r.slug}.png`} alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></span>
+              <div style="min-width:0;">
+                <div style="font-weight:600;font-size:14px;letter-spacing:-.01em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{r.name}{i === 0 && <span style="font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#fff;background:var(--green);padding:2px 7px;border-radius:999px;margin-left:8px;vertical-align:1px;">{s.tag}</span>}</div>
+                <div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:3px;">{r.price}</div>
+              </div>
+              {r.d
+                ? <span class={`dchip ${r.c}`}>{r.c === 'up' ? '↑' : '↓'}{r.d}</span>
+                : <span style="font-family:var(--mono);font-size:10px;color:var(--faint);">—</span>}
+            </div>
+          ))}
+
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:13px;padding-top:13px;border-top:1px solid var(--line);">
+            <span style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);">Segment AOV</span>
+            <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:18px;letter-spacing:-.02em;color:var(--ink);">{s.aov}{s.aovUp && <span style="font-family:var(--mono);font-size:12px;color:var(--green-ink);margin-left:7px;">↑ 68%</span>}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</Frame>

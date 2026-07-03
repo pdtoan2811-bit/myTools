@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>userGuideSnap</title>
+<!-- Mockup: fonts via CDN. For the packed extension, self-host these (MV3 CSP blocks remote in production). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="editor.css">
+</head>
+<body>
+<!-- Liquid Glass: SVG displacement filter that refracts the backdrop at the glass edges -->
+<svg class="ugs-defs" aria-hidden="true" width="0" height="0">
+  <filter id="ugs-liquid" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.010 0.013" numOctaves="2" seed="7" result="n"/>
+    <feGaussianBlur in="n" stdDeviation="2.2" result="nb"/>
+    <feDisplacementMap in="SourceGraphic" in2="nb" scale="28" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+<div class="app">
+  <!-- top bar -->
+  <header class="topbar">
+    <div class="logo"><span class="mk"></span><span>userGuideSnap <small>capture · annotate · export</small></span></div>
+    <button id="projectsBtn" class="btn sm" title="All guides">☰ Guides</button>
+    <input id="guideTitle" class="title-in" value="Untitled guide" />
+    <div class="spacer"></div>
+    <div class="seg" style="margin-right:6px">
+      <button id="bgLight" class="on">Light</button>
+      <button id="bgDark">Dark</button>
+    </div>
+    <button id="exportJson" class="btn sm">Export JSON</button>
+    <button id="exportPng" class="btn primary">Export PNG</button>
+  </header>
+
+  <!-- left: slides -->
+  <aside class="rail">
+    <div class="rail-head"><h3>Slides</h3><span id="slideCount" class="kbd">0</span></div>
+    <div class="cap-bar"><span>New snap →</span><select id="capTarget" class="cap-target"></select></div>
+    <div id="slides" class="slides"></div>
+    <button id="addSlide" class="btn green add-slide">+ Capture / add slide</button>
+  </aside>
+
+  <!-- center: stage -->
+  <main class="stage-wrap" id="stageWrap">
+    <div class="stage-scaler" id="scaler">
+      <div class="stage" id="stage">
+        <div class="ground" id="ground"></div>
+        <div class="stage-pad">
+          <button id="addHeaderBtn" class="add-header">＋ Add header</button>
+          <div class="cap-block" id="capBlock">
+            <div class="left">
+              <span class="eye"><span class="dot"></span><span contenteditable data-bind="eyebrow">Getting started</span></span>
+              <h2 class="head" contenteditable data-bind="head">Step heading goes <span class="pf">here</span></h2>
+              <p class="sub" contenteditable data-bind="sub">One concise sentence describing what the user does on this screen.</p>
+            </div>
+            <span class="step-chip"><b id="stepNum">01</b> / <span id="stepTotal">01</span></span>
+            <button id="rmHeaderBtn" class="rm-header" title="Remove header">×</button>
+          </div>
+          <div class="canvas-area" id="canvas"></div>
+        </div>
+      </div>
+    </div>
+    <button id="editDone" class="edit-done">✓ Done editing arrow</button>
+    <div class="zoom-hud">
+      <button class="btn ghost sm" id="zoomOut">−</button>
+      <b id="zoomLbl">Fit</b>
+      <button class="btn ghost sm" id="zoomIn">+</button>
+      <button class="btn ghost sm" id="zoomFit">Fit</button>
+    </div>
+  </main>
+
+  <!-- right: palette + properties -->
+  <aside class="panel">
+    <section>
+      <h3>Screenshots</h3>
+      <div class="palette">
+        <button class="pal-btn wide" data-frame="upload"><span class="ico">⬆️</span><span>Upload screenshot</span></button>
+        <button class="pal-btn wide" data-frame="demo"><span class="ico">🖼️</span><span>Insert demo app window</span></button>
+      </div>
+      <p class="empty-hint" style="margin-top:10px">In the extension, the toolbar button captures the visible tab and drops it here automatically.</p>
+    </section>
+    <section>
+      <h3>Guiding components</h3>
+      <div class="palette" id="palette">
+        <button class="pal-btn" data-add="badge"><span class="ico"><span class="cmp-badge" style="width:30px;height:30px;font-size:13px">1</span></span>Step badge</button>
+        <button class="pal-btn" data-add="callout"><span class="ico">💬</span>Callout</button>
+        <button class="pal-btn" data-add="connector"><span class="ico">↝</span>Connector</button>
+        <button class="pal-btn" data-add="anchor"><span class="ico">◎</span>Anchor</button>
+        <button class="pal-btn" data-add="highlight"><span class="ico">⬚</span>Highlight</button>
+        <button class="pal-btn" data-add="pill"><span class="ico">🏷️</span>Pill label</button>
+        <button class="pal-btn" data-add="magnifier"><span class="ico">🔍</span>Magnifier</button>
+        <button class="pal-btn" data-add="blur"><span class="ico">▒</span>Blur</button>
+        <button class="pal-btn" data-add="arrow"><span class="ico">↗</span>Free arrow</button>
+      </div>
+    </section>
+    <section>
+      <h3>Layers <span id="layerCount" class="kbd"></span></h3>
+      <div id="layers" class="layers-list"></div>
+    </section>
+    <section id="propsWrap">
+      <h3 id="propsTitle">Properties</h3>
+      <div id="props"><p class="empty-hint">Select an element on the canvas to edit it. Badges auto-number across all slides. <span class="kbd">⌫</span> deletes, <span class="kbd">⌘Z</span> undo.</p></div>
+    </section>
+  </aside>
+</div>
+<div id="dashboard" class="dash">
+  <header class="dash-top">
+    <div class="logo"><span class="mk"></span><span>userGuideSnap <small>your guides</small></span></div>
+    <div class="spacer"></div>
+    <button id="dashNew" class="btn green">＋ New guide</button>
+  </header>
+  <div id="dashGrid" class="dash-grid"></div>
+</div>
+<input type="file" id="fileInput" accept="image/*" hidden />
+<div class="toast" id="toast"></div>
+<script src="editor.js"></script>
+</body>
+</html>

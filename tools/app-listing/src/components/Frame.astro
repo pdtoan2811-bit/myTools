@@ -1,0 +1,24 @@
+---
+/**
+ * Screenshot frame — backdrop + caption header (eyebrow / headline / sub) with
+ * a step counter, and the app window in the default slot bleeding off the
+ * bottom edge for a premium product-shot feel.
+ *   <slot name="head" />  rich headline   ·   <slot name="sub" />  sub-copy
+ */
+interface Props { eyebrow: string; step: string; total?: string; }
+const { eyebrow, step, total = '05' } = Astro.props;
+---
+<div class="bd"></div>
+<div class="layer" style="display:flex;flex-direction:column;padding:62px 80px 0;">
+  <header style="display:flex;align-items:flex-start;justify-content:space-between;gap:48px;margin-bottom:32px">
+    <div style="max-width:62%">
+      <span class="eye"><span class="dot"></span> {eyebrow}</span>
+      <h2 class="head" style="font-size:39px;line-height:1.07;margin-top:18px"><slot name="head" /></h2>
+      <p class="sub" style="font-size:18px;margin-top:14px;max-width:64ch"><slot name="sub" /></p>
+    </div>
+    <span class="step-chip"><b>{step}</b> / {total}</span>
+  </header>
+  <div style="position:relative;flex:1;min-height:0">
+    <slot />
+  </div>
+</div>

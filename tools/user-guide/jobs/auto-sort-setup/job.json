@@ -1,0 +1,33 @@
+{
+  "title": "Set up auto-sort",
+  "slug": "auto-sort-setup",
+  "bg": "light",
+  "baseUrl": "http://localhost:4178",
+  "viewport": { "width": 1200, "height": 760 },
+  "intro": "Auto-sort keeps your collection ordered by what actually sells — no manual reordering. This takes about a minute.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Open Sort rules",
+      "capture": { "path": "/index.html", "wait": "networkidle" },
+      "body": "In the admin sidebar, open **Sort rules**, then choose a **Sort strategy**. *Best sellers* ranks products by units sold.",
+      "els": [
+        { "type": "callout", "x": 720, "y": 110, "w": 300, "text": "Pick a <b>Sort strategy</b> — Best sellers ranks by units sold.", "kicker": "Do this", "step": true },
+        { "type": "anchor", "id": "t1", "at": "#sort-strategy" },
+        { "type": "connector", "from": { "ref": "e1_0" }, "to": { "ref": "t1" }, "caps": "end", "route": "elbow", "thickness": 5 },
+        { "type": "highlight", "at": "#save-apply", "pad": 4 }
+      ],
+      "notes": [{ "kind": "Tip", "text": "Set update frequency to Live so ranking refreshes as orders come in." }]
+    },
+    {
+      "n": 2,
+      "heading": "Watch the collection re-rank",
+      "capture": { "path": "/collection.html", "wait": "networkidle" },
+      "body": "Back on the collection, top sellers automatically float to the top. The badge shows each product's live rank.",
+      "els": [
+        { "type": "callout", "x": 700, "y": 90, "w": 290, "text": "Products re-rank <b>live</b> by sales — #1 is your best seller.", "kicker": "Result", "step": true },
+        { "type": "magnifier", "at": "#top-product", "mag": 2.2, "shape": "circle" }
+      ]
+    }
+  ]
+}

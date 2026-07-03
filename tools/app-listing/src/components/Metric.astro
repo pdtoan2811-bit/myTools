@@ -1,0 +1,28 @@
+---
+/**
+ * Glass outcome card — representative dashboard metric (NOT an uplift claim).
+ * Sits in front of the app window, popping out of the 3D scene.
+ */
+interface Props {
+  label: string;
+  value: string;
+  up?: string;          // e.g. "▲ 0.6 pt" — representative delta
+  sub?: string;
+  live?: boolean;
+  spark?: boolean;
+  dark?: boolean;
+  class?: string;
+}
+const { label, value, up, sub, live = false, spark = true, dark = false, class: cls = '' } = Astro.props;
+---
+<div class={`glass metric${dark ? ' on-dark' : ''} ${cls}`}>
+  <div class="ml">{live && <span class="live"></span>}{label}</div>
+  <div class="mv"><b>{value}</b>{up && <span class="up">{up}</span>}</div>
+  {spark && (
+    <svg class="spark" viewBox="0 0 180 30" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M2 25 L26 22 L50 24 L74 16 L98 18 L122 11 L146 13 L178 3"
+            fill="none" stroke="#00a36b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )}
+  {sub && <div class="msub">{sub}</div>}
+</div>

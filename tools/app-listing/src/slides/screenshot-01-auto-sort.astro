@@ -1,0 +1,55 @@
+---
+import Frame from '../components/Frame.astro';
+import AppTag from '../components/AppTag.astro';
+
+const products = [
+  { slug: 'aurora-sneaker', name: 'Aurora Sneaker', price: '$128', vel: '142', pct: 100, delta: '6', cls: 'up', badge: 'Best seller', lead: true },
+  { slug: 'fashion-jacket', name: 'Wool Overcoat',  price: '$240', vel: '118', pct: 83,  delta: '2', cls: 'up' },
+  { slug: 'fashion-tote',   name: 'Leather Tote',   price: '$185', vel: '97',  pct: 68,  delta: '5', cls: 'up' },
+  { slug: 'fashion-sweater',name: 'Ribbed Sweater', price: '$96',  vel: '84',  pct: 59,  delta: '1', cls: 'up' },
+];
+const chartIc = '<svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 16v-4M13 16V9M18 16v-7"/></svg>';
+---
+<Frame eyebrow="Auto-sort by sales velocity" step="01">
+  <Fragment slot="head">Your best sellers meet shoppers <em>first</em>.</Fragment>
+  <Fragment slot="sub">QSortby reads real demand and re-ranks the collection for you — the products selling fastest rise to the front, automatically.</Fragment>
+
+  <div style="position:relative;height:100%;">
+    <div class="bloom g" style="width:520px;height:300px;left:50%;margin-left:-260px;top:-10px;"></div>
+
+    <div style="position:absolute;left:0;top:6px;"><AppTag status='Summer Collection · <b>auto-sorted by sales</b>' /></div>
+
+    <!-- ranked lineup with the velocity that drives the order -->
+    <div style="position:absolute;left:0;right:0;top:128px;display:flex;justify-content:center;align-items:flex-end;gap:24px;">
+      {products.map((p, i) => (
+        <div class={`sp${p.lead ? ' lead' : ''}`} style="width:252px;">
+          <div class="spim">
+            {p.badge && <span class="spb">{p.badge}</span>}
+            <span class="spd"><span class={`dchip ${p.cls}`}>{p.cls === 'up' ? '↑' : '↓'}{p.delta}</span></span>
+            <img src={`/products/${p.slug}.png`} alt="" />
+          </div>
+          <div class="spname"><span class="spnum">#{i + 1}</span>{p.name}</div>
+          <div style="margin-top:9px;display:flex;align-items:center;gap:9px;">
+            <span style="flex:1;height:7px;border-radius:4px;background:#eef0f2;overflow:hidden;"><i style={`display:block;height:100%;width:${p.pct}%;background:linear-gradient(90deg,var(--green),var(--green-bright))`}></i></span>
+            <span style="font-family:var(--mono);font-size:11px;font-weight:600;color:var(--ink-2);">{p.vel}/wk</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- analyst card frosting over the #1 product -->
+    <div class="glass insight" style="position:absolute;left:206px;top:286px;z-index:6;">
+      <div class="il" set:html={chartIc + 'Why it ranks #1'}></div>
+      <div class="iv"><b>142</b> sold / week</div>
+      <div class="vbars">
+        <div class="vb me"><em>this</em><span class="bar"><i style="width:100%"></i></span></div>
+        <div class="vb av"><em>avg</em><span class="bar"><i style="width:38%"></i></span></div>
+      </div>
+    </div>
+
+    <!-- re-rank cue -->
+    <div class="glass gpill" style="position:absolute;right:150px;top:150px;z-index:6;">
+      <span class="live" style="width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(0,163,107,.2)"></span> Re-ranked 2 min ago
+    </div>
+  </div>
+</Frame>

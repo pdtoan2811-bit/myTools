@@ -1,0 +1,21 @@
+---
+/**
+ * Bare render of a single slide at its exact canvas size.
+ * Used by the editor preview iframe and the export pipeline.
+ */
+import Canvas from '../../layouts/Canvas.astro';
+import { SLIDES } from '../../lib/slides';
+
+const { id } = Astro.params;
+const meta = SLIDES.find((s) => s.id === id);
+if (!meta) return new Response('Unknown slide: ' + id, { status: 404 });
+
+// Resolve the slide component by filename.
+const mods = import.meta.glob('../../slides/*.astro', { eager: true });
+const entry = Object.entries(mods).find(([p]) => p.endsWith(`/${id}.astro`));
+if (!entry) return new Response('No component for slide: ' + id, { status: 404 });
+const Slide = (entry[1] as any).default;
+---
+<Canvas width={meta.width} height={meta.height}>
+  <Slide />
+</Canvas>

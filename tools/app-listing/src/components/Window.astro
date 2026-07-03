@@ -1,0 +1,42 @@
+---
+/**
+ * QSortby app window chrome + sidebar + main header. The per-slide view goes
+ * in the default slot. Keeps every screenshot looking like one coherent app.
+ */
+interface Props {
+  active?: string;
+  tab?: string;
+  title: string;
+  subtitle?: string;
+  live?: boolean;
+}
+const { active = 'collections', tab = 'Collections', title, subtitle, live = true } = Astro.props;
+const nav: [string, string][] = [
+  ['dashboard', 'Dashboard'],
+  ['collections', 'Collections'],
+  ['rules', 'Segment rules'],
+  ['insights', 'Insights'],
+  ['settings', 'Settings'],
+];
+---
+<div class="win">
+  <div class="wtop">
+    <i></i><i></i><i></i>
+    <span class="u"><span class="umk"></span> QSortby · <b>{tab}</b></span>
+  </div>
+  <div class="wbody">
+    <aside class="wside">
+      <div class="brand"><span class="mk"></span> QSortby</div>
+      {nav.map(([id, label]) => (
+        <div class={`wnav${id === active ? ' on' : ''}`}><span class="d"></span> {label}</div>
+      ))}
+    </aside>
+    <div class="wmain">
+      <div class="wh">
+        <div class="ttl">{title}{subtitle && <small>{subtitle}</small>}</div>
+        {live && <span class="live"><i></i> live</span>}
+      </div>
+      <slot />
+    </div>
+  </div>
+</div>

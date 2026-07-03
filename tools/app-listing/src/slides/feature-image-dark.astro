@@ -1,0 +1,83 @@
+---
+import Logo from '../components/Logo.astro';
+import Metric from '../components/Metric.astro';
+import Mark from '../components/Mark.astro';
+
+const products = [
+  { slug: 'aurora-sneaker', name: 'Aurora Sneaker', price: '$128', rate: '4.9', delta: '6', cls: 'up', badge: 'Best seller' },
+  { slug: 'fashion-jacket', name: 'Wool Overcoat',  price: '$240', rate: '4.9', delta: '2', cls: 'up' },
+  { slug: 'fashion-tote',   name: 'Leather Tote',   price: '$185', rate: '4.8', delta: '5', cls: 'up' },
+  { slug: 'fashion-sweater',name: 'Ribbed Sweater', price: '$96',  rate: '4.8', delta: '1', cls: 'up' },
+  { slug: 'linen-overshirt',name: 'Linen Overshirt', price: '$89', rate: '4.7', delta: '1', cls: 'dn' },
+  { slug: 'fashion-skirt',  name: 'Pleated Skirt',   price: '$76', rate: '4.6', delta: '2', cls: 'dn' },
+];
+const chartIc = '<svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 16v-4M13 16V9M18 16v-7"/></svg>';
+---
+<div class="world dark"></div>
+<div class="layer">
+  <div style="position:absolute;left:76px;top:0;bottom:0;width:486px;display:flex;flex-direction:column;justify-content:center;">
+    <div style="margin-bottom:36px"><Logo mark={42} dark /></div>
+    <span class="eye on-dark" style="align-self:flex-start"><span class="dot"></span> Shopify-native · Collection sorting</span>
+    <h1 class="head on-dark" style="font-size:60px;line-height:1.02;margin-top:22px;max-width:12ch">
+      Turn browsing into <em>buying</em>.
+    </h1>
+    <p class="sub on-dark" style="font-size:19px;margin-top:22px;max-width:40ch">
+      QSortby ranks every product by the data that actually drives sales — so your storefront always opens with what converts.
+    </p>
+    <div class="chips" style="margin-top:30px">
+      <span class="chip on-dark"><span class="stars">★★★★★</span> 5.0</span>
+      <span class="chip on-dark"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Live in 5 minutes</span>
+      <span class="chip on-dark"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> No theme code</span>
+    </div>
+  </div>
+
+  <div class="bloom g" style="width:500px;height:500px;right:0;top:30px;opacity:.95;"></div>
+
+  <div style="position:absolute;left:648px;top:150px;width:712px;display:flex;align-items:center;justify-content:space-between;">
+    <h3 style="font-family:'Inter',sans-serif;font-weight:600;font-size:22px;letter-spacing:-.022em;color:#fff;margin:0;">Best Sellers</h3>
+    <span class="sortpill"><Mark size={16} /> Ranked by QSortby <i></i> live</span>
+  </div>
+
+  <div class="on-dark-grid" style="position:absolute;left:648px;top:196px;width:712px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+    {products.map((p, i) => (
+      <div class={`sp${i === 0 ? ' lead' : ''}`}>
+        <div class="spim">
+          {p.badge && <span class="spb">{p.badge}</span>}
+          <span class="spd"><span class={`dchip ${p.cls}`}>{p.cls === 'up' ? '↑' : '↓'}{p.delta}</span></span>
+          <img src={`/products/${p.slug}.png`} alt="" />
+        </div>
+        <div class="spname"><span class="spnum">#{i + 1}</span>{p.name}</div>
+        <div class="sprow"><span class="spp">{p.price}</span><span class="sprate">★ {p.rate}</span></div>
+      </div>
+    ))}
+  </div>
+
+  <div class="glass insight" style="position:absolute;left:600px;top:320px;z-index:6;">
+    <div class="il" set:html={chartIc + 'Why it ranks #1'}></div>
+    <div class="iv">Converts <b>2.3×</b> store average</div>
+    <div class="vbars">
+      <div class="vb me"><em>this</em><span class="bar"><i style="width:100%"></i></span></div>
+      <div class="vb av"><em>avg</em><span class="bar"><i style="width:43%"></i></span></div>
+    </div>
+  </div>
+
+  <div class="glass insight" style="position:absolute;left:1198px;top:320px;z-index:6;">
+    <div class="il"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block"></span> Trending now</div>
+    <div class="iv">Demand <b>↑ 40%</b></div>
+    <div class="is">units sold · last 7 days</div>
+    <svg class="vspark" viewBox="0 0 180 34" preserveAspectRatio="none">
+      <path class="f" d="M2 28 L30 25 L58 26 L86 17 L114 19 L142 9 L178 4 L178 34 L2 34 Z" />
+      <path class="l" d="M2 28 L30 25 L58 26 L86 17 L114 19 L142 9 L178 4" vector-effect="non-scaling-stroke" />
+    </svg>
+  </div>
+
+  <div class="glass insight" style="position:absolute;left:872px;top:612px;z-index:6;">
+    <div class="il" set:html={chartIc + 'Revenue share'}></div>
+    <div class="vdonut">
+      <svg viewBox="0 0 44 44"><circle class="track" cx="22" cy="22" r="18" /><circle class="val" cx="22" cy="22" r="18" stroke-dasharray="24.9 88" /></svg>
+      <span class="lbl"><b>22%</b> of collection revenue</span>
+    </div>
+  </div>
+
+  <div style="position:absolute;left:1300px;top:128px;z-index:6;"><Metric label="Revenue · today" value="$48.6k" up="↑ 12%" sub="vs yesterday" live dark /></div>
+</div>

@@ -1,0 +1,8 @@
+node_modules/
+.astro/
+.DS_Store
+.env
+
+# Generated output — regenerate with `npm run export` / `gen-products.mjs`
+exports/*.png
+public/products/*.png

@@ -1,0 +1,28 @@
+---
+/**
+ * Shopper-POV phone — the live storefront the buyer sees, sorted by QSortby.
+ * Ties the merchant tool to the buyer experience.
+ */
+interface Item { slug: string; title: string; price: string; tag?: string; hot?: boolean; dim?: boolean; }
+interface Props { shop?: string; section?: string; meta?: string; items: Item[]; }
+const { shop = 'Lumen & Co.', section = 'Best sellers', meta = 'auto-sorted', items } = Astro.props;
+---
+<div class="phone">
+  <div class="screen">
+    <span class="notch"></span>
+    <div class="ph-top">
+      <span class="shop"><span class="d"></span> {shop}</span>
+      <span class="bag">Bag · 2</span>
+    </div>
+    <div class="ph-sec"><b>{section}</b><span>{meta}</span></div>
+    <div class="ph-grid">
+      {items.map((it) => (
+        <div class={`sfcard${it.hot ? ' hot' : ''}${it.dim ? ' dim' : ''}`}>
+          {it.tag && <span class="tag">{it.tag}</span>}
+          <div class="img"><img src={`/products/${it.slug}.png`} alt="" /></div>
+          <div class="meta"><div class="t">{it.title}</div><div class="p">{it.price}</div></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

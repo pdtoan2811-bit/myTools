@@ -1,0 +1,62 @@
+---
+import Frame from '../components/Frame.astro';
+import Metric from '../components/Metric.astro';
+import AppTag from '../components/AppTag.astro';
+
+const inStock = [
+  { slug: 'fashion-denim',  name: 'Selvedge Denim', price: '$120', stock: '240 in stock', delta: '3', badge: 'Best seller', lead: true },
+  { slug: 'fashion-loafer', name: 'Penny Loafer',   price: '$145', stock: '58 in stock',  delta: '2' },
+  { slug: 'fashion-trench', name: 'Cotton Trench',  price: '$210', stock: '96 in stock',  delta: '1' },
+];
+---
+<Frame eyebrow="Inventory-aware ranking" step="03">
+  <Fragment slot="head">Never <em>dead-end</em> a ready-to-buy shopper.</Fragment>
+  <Fragment slot="sub">The moment something sells out, QSortby drops it down the page — so shoppers only meet products they can actually add to cart.</Fragment>
+
+  <div style="position:relative;height:100%;">
+    <div class="bloom g" style="width:480px;height:300px;left:36%;margin-left:-240px;top:0;"></div>
+
+    <div style="position:absolute;left:0;top:6px;"><AppTag status='Best Sellers · <b>in-stock first</b>' /></div>
+    <div style="position:absolute;right:0;top:2px;z-index:6;"><Metric label="Dead-end clicks" value="0" up="" sub="sold-out auto-hidden" spark={false} /></div>
+
+    <div style="position:absolute;left:0;right:0;top:128px;display:flex;justify-content:center;align-items:flex-start;gap:26px;">
+      {inStock.map((p, i) => (
+        <div class={`sp${p.lead ? ' lead' : ''}`} style="width:240px;">
+          <div class="spim">
+            {p.badge && <span class="spb">{p.badge}</span>}
+            <span class="spd"><span class="dchip up">↑{p.delta}</span></span>
+            <img src={`/products/${p.slug}.png`} alt="" />
+          </div>
+          <div class="spname"><span class="spnum">#{i + 1}</span>{p.name}</div>
+          <div style="margin-top:9px;display:flex;align-items:center;justify-content:space-between;">
+            <span class="spp">{p.price}</span>
+            <span style="font-family:var(--mono);font-size:10.5px;color:var(--green-ink);display:inline-flex;align-items:center;gap:6px;"><span style="width:7px;height:7px;border-radius:50%;background:var(--green)"></span> In stock</span>
+          </div>
+        </div>
+      ))}
+
+      <!-- sold-out: stamped + demoted down -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:13px;margin-top:122px;">
+        <div class="glass gpill" style="color:var(--down);"><span class="av" style="background:var(--down)">↓</span> Moved to bottom</div>
+        <div class="sp" style="width:240px;filter:saturate(.55);opacity:.9;">
+          <div class="spim">
+            <span class="stamp"><span>Sold out</span></span>
+            <img src="/products/fashion-cap.png" alt="" style="filter:grayscale(.85)" />
+          </div>
+          <div class="spname"><span class="spnum">#14</span>Cotton Cap</div>
+          <div style="margin-top:9px;display:flex;align-items:center;justify-content:space-between;">
+            <span class="spp">$48</span>
+            <span style="font-family:var(--mono);font-size:10.5px;color:var(--down);">Out of stock</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- analyst card -->
+    <div class="glass insight" style="position:absolute;left:150px;top:300px;z-index:6;">
+      <div class="il"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block"></span> Inventory-aware</div>
+      <div class="iv">Sold-out items <b>auto-hidden</b></div>
+      <div class="is">shoppers never hit a dead end</div>
+    </div>
+  </div>
+</Frame>

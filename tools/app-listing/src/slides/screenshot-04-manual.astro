@@ -1,0 +1,68 @@
+---
+import Frame from '../components/Frame.astro';
+import Metric from '../components/Metric.astro';
+import AppTag from '../components/AppTag.astro';
+
+const autoRow = [
+  { slug: 'fashion-loafer', name: 'Penny Loafer',   price: '$145', delta: '2' },
+  { slug: 'fashion-denim',  name: 'Selvedge Denim', price: '$120', delta: '1' },
+  { slug: 'fashion-sweater',name: 'Ribbed Sweater', price: '$96',  delta: '3' },
+  { slug: 'fashion-scarf',  name: 'Wool Scarf',     price: '$58',  delta: '1' },
+];
+const pinIc = '<svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:currentColor"><path d="M9 4h6l-1 7 4 3v2H6v-2l4-3-1-7z"/></svg>';
+const chartIc = '<svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 16v-4M13 16V9M18 16v-7"/></svg>';
+---
+<Frame eyebrow="Manual control & pinning" step="04">
+  <Fragment slot="head">Put your launch <em>front and centre</em>.</Fragment>
+  <Fragment slot="sub">Pin the drop you're betting on to the top spot, then let auto-sort merchandise everything beneath it. Your call on the heroes, automation on the rest.</Fragment>
+
+  <div style="position:relative;height:100%;">
+    <div class="bloom g" style="width:460px;height:300px;left:50%;margin-left:-230px;top:-10px;"></div>
+
+    <div style="position:absolute;left:0;top:6px;"><AppTag status='New Arrivals · <b>pinned by you</b>' /></div>
+
+    <!-- sell-through stat, frosting over the launch's top-right -->
+    <div style="position:absolute;left:calc(50% + 64px);top:150px;z-index:6;"><Metric label="Launch sell-through" value="88%" up="↑" sub="first 7 days" live /></div>
+
+    <!-- pinned hero -->
+    <div style="position:absolute;left:50%;top:96px;transform:translateX(-50%);">
+      <div class="spotlight" style="width:420px;height:360px;left:50%;margin-left:-210px;top:-20px;"></div>
+      <div class="sp lead" style="width:256px;position:relative;">
+        <div class="spim">
+          <span class="spb" style="background:var(--ink);" set:html={pinIc + 'Pinned · #1'}></span>
+          <img src="/products/fashion-trench.png" alt="" />
+        </div>
+        <div class="spname"><span class="spnum">#1</span>Cotton Trench — New</div>
+        <div class="sprow"><span class="spp">$210</span><span class="sprate">★ 4.9</span></div>
+      </div>
+    </div>
+
+    <!-- analyst card frosting over the launch -->
+    <div class="glass insight" style="position:absolute;left:calc(50% - 250px);top:250px;z-index:6;">
+      <div class="il" set:html={chartIc + 'Featured spot'}></div>
+      <div class="iv"><b>3.1×</b> more product views</div>
+      <div class="vbars">
+        <div class="vb me"><em>pinned</em><span class="bar"><i style="width:100%"></i></span></div>
+        <div class="vb av"><em>normal</em><span class="bar"><i style="width:32%"></i></span></div>
+      </div>
+    </div>
+
+    <div style="position:absolute;left:0;right:0;top:430px;text-align:center;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:9px;">
+      <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--green);stroke-width:2.4"><path d="M12 5v14M6 13l6 6 6-6"/></svg> then auto-sorted by demand
+    </div>
+
+    <!-- auto-sorted rest -->
+    <div style="position:absolute;left:0;right:0;top:470px;display:flex;justify-content:center;gap:18px;">
+      {autoRow.map((p, i) => (
+        <div class="sp" style="width:158px;">
+          <div class="spim">
+            <span class="spd"><span class="dchip up">↑{p.delta}</span></span>
+            <img src={`/products/${p.slug}.png`} alt="" />
+          </div>
+          <div class="spname"><span class="spnum">#{i + 2}</span>{p.name}</div>
+          <div class="sprow"><span class="spp">{p.price}</span><span style="font-family:var(--mono);font-size:10.5px;color:var(--muted);">auto</span></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</Frame>

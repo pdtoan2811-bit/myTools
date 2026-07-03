@@ -1,0 +1,17 @@
+{
+  "name": "@ugs/userguidesnap",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "userGuideSnap engine — the editor, the Chrome extension, and the Playwright render pipeline.",
+  "main": "render.mjs",
+  "bin": { "ugs-render": "render.mjs" },
+  "scripts": {
+    "render": "node render.mjs",
+    "render:example": "node render.mjs samples/example-guide.json --composite",
+    "setup": "playwright install chromium"
+  },
+  "devDependencies": {
+    "playwright": "^1.45.0"
+  }
+}

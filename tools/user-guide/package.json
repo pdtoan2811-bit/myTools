@@ -1,0 +1,17 @@
+{
+  "name": "userguidesnap-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "userGuideSnap — Claude-driven user-guide factory. Engine + Guide Studio app + job worker.",
+  "workspaces": ["packages/*", "apps/*", "workers/*"],
+  "scripts": {
+    "setup": "npm --workspace @ugs/userguidesnap run setup",
+    "guide": "node workers/guide-jobs/run.mjs",
+    "publish": "node workers/guide-jobs/publish.mjs",
+    "studio": "node apps/guide-studio/serve.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.45.0"
+  }
+}
