@@ -1,0 +1,114 @@
+{
+  "title": "Connect your integrations",
+  "slug": "qsortby-integrations",
+  "publish": {
+    "app": "qsortby",
+    "section": "6-settings",
+    "order": 40,
+    "file": "integrations",
+    "description": "Link qSortBy to third-party tools — manage your connected Klaviyo account and connect Google Analytics 4."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "The **Integrations** page links qSortBy to the third-party tools that feed it richer signals. This guide covers managing a connected Klaviyo account and connecting Google Analytics 4.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Review your Klaviyo connection",
+      "capture": {
+        "path": "/preview/integrations",
+        "wait": "networkidle"
+      },
+      "body": "Open **Integrations** from the left menu. **Klaviyo** shows here as **connected**. The card lists the linked **account** and the **granted scopes** — the exact permissions qSortBy was given. Select **Disconnect** if you ever need to revoke access and unlink the account.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 320,
+          "kicker": "Find it",
+          "step": true,
+          "text": "Open <b>Integrations</b> from the left menu — <b>Klaviyo</b> shows as <b>connected</b> with its <b>account</b> and <b>granted scopes</b>."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Integrations\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Integrations\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "magnifier",
+          "at": ".Polaris-Badge:has-text(\"Connected\")",
+          "mag": 2.4,
+          "shape": "circle"
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "Review the granted scopes before you rely on an integration — they tell you exactly what data qSortBy can read."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Connect Google Analytics 4",
+      "capture": {
+        "path": "/preview/integrations",
+        "wait": "networkidle"
+      },
+      "body": "**Google Analytics 4** is not linked yet. Select **Connect** on its card to start the OAuth flow — you'll sign in to Google and approve the scopes qSortBy needs. Once connected, its engagement data feeds into your sorts alongside Shopify's.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 640,
+          "y": 460,
+          "w": 320,
+          "kicker": "Step 1",
+          "step": true,
+          "text": "Select <b>Connect</b> on the <b>Google Analytics 4</b> card to sign in with Google and approve access."
+        },
+        {
+          "type": "anchor",
+          "id": "a2",
+          "at": "text=Google Analytics 4"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c2"
+          },
+          "to": {
+            "ref": "a2"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    }
+  ],
+  "outro": "That's integrations: keep an eye on your connected Klaviyo account and its scopes, and connect Google Analytics 4 to fold its data into qSortBy's ranking."
+}

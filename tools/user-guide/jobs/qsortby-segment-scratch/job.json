@@ -1,0 +1,255 @@
+{
+  "title": "Build a segment rule from scratch",
+  "slug": "qsortby-segment-scratch",
+  "publish": {
+    "app": "qsortby",
+    "section": "4-personalization",
+    "order": 30,
+    "file": "build-from-scratch",
+    "description": "Build a rule by hand: name it, add a shopper group, set audience conditions and ranking signals, and understand the Everyone else fallback."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "Building from scratch gives you full control over exactly who a rule targets and how their products are ranked. You'll name the rule, add a shopper group, define its audience with conditions, choose ranking signals and how much each one matters, and see the locked Everyone else fallback that catches everyone you didn't target.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Name the rule",
+      "capture": {
+        "path": "/preview/segment-rules/new?start=scratch",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "fill": {
+              "selector": "input[placeholder=\"e.g. Returning vs. new shoppers\"]",
+              "value": "Returning vs. new shoppers"
+            }
+          },
+          {
+            "wait": 300
+          }
+        ]
+      },
+      "body": "Open **Segment Rules** from the left menu, then **Create segment rule** and choose **build from scratch**. Give the rule a clear **name** so you'll recognize it in the list later — something like *Returning vs. new shoppers*. The rule opens as a **Draft** and autosaves, so nothing goes live while you build. Not sure what to call it? Select **Suggest**.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 320,
+          "kicker": "Find it",
+          "step": true,
+          "text": "Open <b>Segment Rules</b> from the left menu, then <b>Create segment rule</b> → <b>build from scratch</b>, and name your rule."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Segment Rules\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Segment Rules\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Add a shopper group",
+      "capture": {
+        "path": "/preview/segment-rules/new?start=scratch",
+        "wait": "networkidle"
+      },
+      "body": "A **shopper group** is one audience you want to treat differently. Select **Add a shopper group** to create one — you can add several, each with its own audience and ranking. Below your groups sits **Everyone else**, the catch-all that handles every shopper a group didn't match.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 600,
+          "y": 300,
+          "w": 320,
+          "kicker": "Step 2",
+          "step": true,
+          "text": "Select <b>Add a shopper group</b> to define one audience. Add as many groups as you need."
+        },
+        {
+          "type": "anchor",
+          "id": "a2",
+          "at": "button:has-text(\"Add a shopper group\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c2"
+          },
+          "to": {
+            "ref": "a2"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Define the audience",
+      "capture": {
+        "path": "/preview/segment-rules/new?start=scratch",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "click": "button:has-text(\"Add a shopper group\")"
+          },
+          {
+            "wait": 500
+          }
+        ]
+      },
+      "body": "Inside a group, build its audience from **conditions**. Each condition is three parts: an **Attribute** (like *Past purchases* or *Days since last visit*), a **Comparison** (*is at least*, *is more than*…), and a **Value**. Select **Add condition** to stack more — a shopper must match them all to fall into this group.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 620,
+          "y": 250,
+          "w": 320,
+          "kicker": "Step 3",
+          "step": true,
+          "text": "Build the audience as <b>Attribute + Comparison + Value</b>. Add conditions to narrow it further."
+        },
+        {
+          "type": "anchor",
+          "id": "a3",
+          "at": "text=Attribute"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c3"
+          },
+          "to": {
+            "ref": "a3"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "magnifier",
+          "at": "label:has-text(\"Attribute\")",
+          "mag": 2.2,
+          "shape": "rect"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "heading": "Pick ranking signals and their importance",
+      "capture": {
+        "path": "/preview/segment-rules/new?start=scratch",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "click": "button:has-text(\"Add a shopper group\")"
+          },
+          {
+            "wait": 500
+          }
+        ]
+      },
+      "body": "Now decide how this group's products are ordered. Under **Ranking**, choose **signals** — *Repeat purchase*, *Recently viewed*, *Top sellers* and more — and set how much each one matters with **Set importance %**. Higher importance pulls that signal harder. Select **Add signal** to blend several.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c4",
+          "x": 620,
+          "y": 300,
+          "w": 320,
+          "kicker": "Step 4",
+          "step": true,
+          "text": "Choose <b>ranking signals</b> and weight each with <b>Set importance %</b> — higher pulls harder."
+        },
+        {
+          "type": "anchor",
+          "id": "a4",
+          "at": "text=Ranking"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c4"
+          },
+          "to": {
+            "ref": "a4"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "Blend signals rather than relying on one — e.g. Repeat purchase weighted high, Favorite category affinity as a lighter boost."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "heading": "The Everyone else fallback",
+      "capture": {
+        "path": "/preview/segment-rules/new?start=scratch",
+        "wait": "networkidle"
+      },
+      "body": "At the bottom sits **Everyone else** — a locked catch-all you can't delete. Any shopper who doesn't match one of your groups is ranked here, by default with **Top sellers** then **New arrivals**. Because it always covers the remainder, every shopper gets a sensible order even before you add more groups.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c5",
+          "x": 600,
+          "y": 320,
+          "w": 330,
+          "kicker": "Fallback",
+          "step": true,
+          "text": "<b>Everyone else</b> is a locked catch-all — it ranks every shopper your groups didn't match."
+        },
+        {
+          "type": "anchor",
+          "id": "a5",
+          "at": "text=Everyone else"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c5"
+          },
+          "to": {
+            "ref": "a5"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    }
+  ],
+  "outro": "You've built a rule by hand: named it, added a targeted shopper group with audience conditions and weighted ranking signals, and seen how Everyone else catches the rest. Next, review the live preview and publish it."
+}

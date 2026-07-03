@@ -236,19 +236,19 @@
       f.setAttribute('x', '-25%'); f.setAttribute('y', '-25%'); f.setAttribute('width', '150%'); f.setAttribute('height', '150%');
       f.setAttribute('color-interpolation-filters', 'sRGB');
       const t = document.createElementNS(SVGNS, 'feTurbulence');
-      t.setAttribute('type', 'fractalNoise'); t.setAttribute('baseFrequency', '0.010 0.013'); t.setAttribute('numOctaves', '2'); t.setAttribute('seed', '7'); t.setAttribute('result', 'n');
-      const g = document.createElementNS(SVGNS, 'feGaussianBlur'); g.setAttribute('in', 'n'); g.setAttribute('stdDeviation', '2.2'); g.setAttribute('result', 'nb');
+      t.setAttribute('type', 'fractalNoise'); t.setAttribute('baseFrequency', '0.007 0.011'); t.setAttribute('numOctaves', '3'); t.setAttribute('seed', '7'); t.setAttribute('result', 'n');
+      const g = document.createElementNS(SVGNS, 'feGaussianBlur'); g.setAttribute('in', 'n'); g.setAttribute('stdDeviation', '1.8'); g.setAttribute('result', 'nb');
       const d = document.createElementNS(SVGNS, 'feDisplacementMap'); d.setAttribute('in', 'SourceGraphic'); d.setAttribute('in2', 'nb'); d.setAttribute('xChannelSelector', 'R'); d.setAttribute('yChannelSelector', 'G');
       f.append(t, g, d); defs.append(f);
     }
     f.querySelector('feDisplacementMap').setAttribute('scale', scale);
   }
   function applyLiquid() {
-    const base = 'blur(7px) saturate(190%) brightness(1.06)';
+    const base = 'blur(3px) saturate(180%) brightness(1.03)';
     activeSlide().els.forEach((el) => {
       if (el.type !== 'callout') return;
       const node = canvas.querySelector(`[data-id="${el.id}"] .cmp-callout`); if (!node) return;
-      const lvl = el.liquid == null ? 28 : el.liquid;
+      const lvl = el.liquid == null ? 115 : el.liquid;
       let bf = base;
       if (lvl > 0) { ensureLiquidFilter(el.id, lvl); bf = `${base} url(#ugs-liq-${el.id})`; }
       node.style.backdropFilter = bf; node.style.webkitBackdropFilter = bf;

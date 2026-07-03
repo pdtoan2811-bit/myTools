@@ -1,0 +1,152 @@
+{
+  "title": "Review, preview, and publish a segment rule",
+  "slug": "qsortby-segment-publish",
+  "publish": {
+    "app": "qsortby",
+    "section": "4-personalization",
+    "order": 40,
+    "file": "publish-and-manage",
+    "description": "Review an existing rule, read its live reach preview and In plain words summary, then publish it — only one rule is live at a time."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "Before a segment rule goes live, review exactly what it will do. qSortBy shows each group's reach, a live product preview, and a plain-English summary of the whole rule. This guide covers reviewing an existing rule and publishing it.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Review the rule and its reach",
+      "capture": {
+        "path": "/preview/segment-rules/sr-01",
+        "wait": "networkidle"
+      },
+      "body": "Open **Segment Rules** from the left menu, then select any rule to review it. Each shopper group shows what it **ranks by** and its **reach** — an estimate of the share of shoppers it covers. Here, **Returning customers** reaches about 34% and **Everyone else** covers the remaining 66%. Reach helps you sanity-check that your groups are aimed where you intend.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 330,
+          "kicker": "Find it",
+          "step": true,
+          "text": "Open <b>Segment Rules</b> from the left menu, then select a rule — each group shows its <b>reach</b>, and they add up to 100%."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Segment Rules\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Segment Rules\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Check the live preview and plain-words summary",
+      "capture": {
+        "path": "/preview/segment-rules/sr-01",
+        "wait": "networkidle"
+      },
+      "body": "The **Preview** panel does a dry run, showing the product order each group would see side by side. Below it, **In plain words** restates the entire rule as sentences — *Returning customers → Repeat purchase first, then Favorite category affinity; Everyone else → Top sellers first, then New arrivals* — so you can confirm the logic at a glance before going live.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 620,
+          "y": 470,
+          "w": 330,
+          "kicker": "Step 2",
+          "step": true,
+          "text": "<b>In plain words</b> restates the whole rule in sentences — a quick sanity check before publishing."
+        },
+        {
+          "type": "anchor",
+          "id": "a2",
+          "at": "text=In plain words"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c2"
+          },
+          "to": {
+            "ref": "a2"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "The preview is a dry run — nothing changes on your storefront until the rule is published."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Publish the rule",
+      "capture": {
+        "path": "/preview/segment-rules/sr-01",
+        "wait": "networkidle"
+      },
+      "body": "When the reach and preview look right, publish the rule to make it live. **Only one segment rule is published at a time** — publishing a rule automatically takes over from whichever was live before, so there's never a conflict. An already-live rule shows **Unpublish**, which steps it back down to a safe Draft.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 610,
+          "y": 150,
+          "w": 330,
+          "kicker": "Step 3",
+          "step": true,
+          "text": "Publish to go live. Only <b>one rule is live at a time</b>; a published rule shows <b>Unpublish</b>."
+        },
+        {
+          "type": "anchor",
+          "id": "a3",
+          "at": "button:has-text(\"Unpublish\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c3"
+          },
+          "to": {
+            "ref": "a3"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "magnifier",
+          "at": "button:has-text(\"Unpublish\")",
+          "mag": 2.4,
+          "shape": "circle"
+        }
+      ]
+    }
+  ],
+  "outro": "That's the review-and-publish loop: check each group's reach, confirm the order in Preview, read the In plain words summary, then publish. Because only one rule is live at a time, going live with a new rule cleanly replaces the previous one."
+}

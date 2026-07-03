@@ -78,7 +78,7 @@ image paths to `/assets/<file>/…`, and converts `> **Tip:**` blockquotes to `<
   "slug": "auto-sort-setup",            // kebab-case; drives filenames
   "bg": "light",                        // light | dark slide ground
   "baseUrl": "http://localhost:4178",   // the running app
-  "viewport": { "width": 1200, "height": 760 },
+  "viewport": { "width": 1200, "height": 720 },  // short & WIDE (~1.6:1) so the app's own text stays big & legible — see "Readability & sizing" below
   "storageState": "auth.json",          // OPTIONAL Playwright storage-state (relative to job dir) for logged-in capture
   "intro": "One or two sentences.",
   "steps": [
@@ -89,7 +89,7 @@ image paths to `/assets/<file>/…`, and converts `> **Tip:**` blockquotes to `<
         "path": "/admin/sort-rules",     // appended to baseUrl
         "wait": "networkidle",           // load|domcontentloaded|networkidle
         "fullPage": false,               // true = scroll-capture the whole page
-        "selector": ".main",             // OPTIONAL capture just this element
+        "selector": ".main",             // OPTIONAL clip to one element. AVOID tall clips (a whole scrolling page) — they shrink the app text. Prefer a viewport capture (omit this) or a tight section.
         "actions": [                     // OPTIONAL pre-shot interactions
           { "click": "button.open" }, { "fill": { "selector": "#q", "value": "shoes" } }, { "wait": 300 }
         ]
@@ -103,6 +103,25 @@ image paths to `/assets/<file>/…`, and converts `> **Tip:**` blockquotes to `<
   "outro": "Optional closing markdown."
 }
 ```
+
+## Readability & sizing — keep the app BIG  📐
+
+The #1 quality lever is that the reader can actually **read the app's own text** in the
+screenshot. The engine fits each capture into a landscape slide canvas, so a **tall** capture
+gets shrunk hard and the UI turns tiny. Keep captures **short and wide**:
+
+- **Viewport `1200 × 720`** (~1.6:1) — matches the canvas, so the app fills it nearly 1:1 and
+  its text stays large. Taller viewports (e.g. 1000+px) shrink everything — don't.
+- **Capture the viewport, not a tall element.** Omit `capture.selector` for a normal shot.
+  Only clip to a selector when it's a *small, tight* region — never a whole scrolling page/`.Polaris-Page`
+  (that captures the full height and shrinks the app). Content below the fold is simply out of
+  frame; if a step's target is low on the page, scroll it up with a `capture.actions` click or
+  pick a higher target.
+- The engine captures at **deviceScaleFactor 3** and fits the frame to **99%** of the canvas, so
+  the app is both big and crisp. You don't set these — just keep the viewport short/wide.
+- **Callout typography is already tuned large** (≈19px body, 12.5px kicker) and the glass is a
+  **crystal Liquid-Glass** (clear, refractive, chromatic-edged) — both automatic. Don't restyle;
+  just place callouts and let the engine render.
 
 ## Accuracy: bind to selectors, don't guess pixels  ⭐
 
@@ -142,8 +161,55 @@ real control (see above) — then omit `x/y`.
 step 1 is `e1_0`). When wiring a connector, either give the callout an explicit `id` and
 reference it, or reference the auto id. Anchors you point at should always have an explicit `id`.
 
+## Navigation & the magnifier — make guides orient and zoom  🧭🔍
+
+Two patterns every guide should use. See [`assets/preview-nav-magnifier.png`](assets/preview-nav-magnifier.png) for the rendered look.
+
+### 1. Orient in the left menu first
+A reader's first question is always *"where do I click to get here?"* Answer it before anything
+else. **Step 1 of every feature guide orients in the app's left navigation** — point at the menu
+item that opens the screen, so the path is obvious:
+
+```jsonc
+"els": [
+  { "type": "callout", "id": "c1", "x": 470, "y": 150, "w": 300, "kicker": "Find it",
+    "step": true, "text": "Open <b>Products</b> from the left menu." },
+  { "type": "highlight", "at": ".Polaris-Navigation__Item:has-text(\"Products\")", "pad": 4 },
+  { "type": "anchor", "id": "a1", "at": ".Polaris-Navigation__Item:has-text(\"Products\")" },
+  { "type": "connector", "from": { "ref": "c1" }, "to": { "ref": "a1" }, "caps": "end", "route": "elbow", "thickness": 5 }
+]
+```
+
+- **Nav item selector:** `.Polaris-Navigation__Item:has-text("<Label>")`. Use the exact menu
+  label (Dashboard, Collections, Products, Segment Rules, Analytics, Insights, Settings,
+  Integrations, Plans & Billing).
+- **Deeper destinations** need a two-hop path. For a screen reached *through* another
+  (Settings → Product taxonomy) or a **tab** within a screen (a collection's *Preview & test*),
+  add a second orientation cue after the nav: highlight the sub-link or the tab
+  (`.Polaris-Tabs__Tab:has-text("Preview & test")`). Tell the reader the trail: *"Left menu →
+  Settings → Product taxonomy."*
+- Keep the nav highlight on **step 1 only** (unless a later step changes screens); inner steps
+  focus on the controls.
+
+### 2. Use the magnifier for the one "look here" detail
+Every guide should include **at least one magnifier** — it zooms the single small thing the step
+is about (a status badge, a metric cell, a dropdown value, a toggle, a delta arrow) so it's
+legible in the rendered image and pulls the eye. Bind it with `at` to that exact control:
+
+```jsonc
+{ "type": "magnifier", "at": ".Polaris-Badge:has-text(\"Live\")", "mag": 2.4, "shape": "circle" }
+```
+
+- **`shape`:** `circle` for a point (a badge, an icon, a single cell); `rect` for a wide control
+  (a dropdown, a table row, the "In plain words" panel).
+- **`mag`:** ~2.2–2.6 for small text/badges; ~1.8 for a wider region.
+- Magnify the detail *instead of* describing "the little X" in prose — let the loupe do the work.
+- Don't stack a magnifier and a highlight on the *same* tiny spot; pick one. A common strong
+  combo is: nav highlight (where) + callout→connector (what) + magnifier on the key detail (look).
+
 ## Style notes
-- Default to a single callout + a connector pointing at the exact control, plus `step:true`.
-- Use a magnifier to emphasize a small UI detail; a highlight to frame a larger region.
+- Every feature guide: **step 1 orients in the left menu**; **≥1 magnifier** on the key detail.
+- Otherwise default to a single callout + a connector pointing at the exact control, plus `step:true`.
+- Use a highlight to frame a larger region; the magnifier to zoom a small one.
 - Keep prose imperative and short. One screenshot per step.
 - The output matches the QSortby editorial-glass look automatically — don't restyle.

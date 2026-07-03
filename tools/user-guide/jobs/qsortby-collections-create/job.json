@@ -1,0 +1,215 @@
+{
+  "title": "Create a collection",
+  "slug": "qsortby-collections-create",
+  "publish": {
+    "app": "qsortby",
+    "section": "3-collections",
+    "order": 20,
+    "file": "create-collection",
+    "description": "Name a new collection, choose how products join it, and pick the sort rule that keeps it ordered."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "Creating a collection in qSortBy takes three decisions: what to call it, how products join it, and how it sorts. This guide walks through each one so your new collection is live and re-ranking from day one.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Name the collection",
+      "capture": {
+        "path": "/preview/collections/new",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "fill": {
+              "selector": "input[placeholder=\"e.g. Summer Essentials\"]",
+              "value": "Summer Essentials"
+            }
+          },
+          {
+            "wait": 300
+          }
+        ]
+      },
+      "body": "Open **Collections** from the left menu, then select **Create collection**. Give the collection a clear, shopper-facing name in the top field — this is the title customers see on your storefront. qSortBy creates a real Shopify collection in your store under this name.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 300,
+          "kicker": "Find it",
+          "step": true,
+          "text": "Start from <b>Collections</b> in the left menu, then <b>Create collection</b>. Type a shopper-facing name — it becomes a real Shopify collection."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Collections\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Collections\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "highlight",
+          "at": "input[placeholder=\"e.g. Summer Essentials\"]",
+          "pad": 4
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Choose how products are added",
+      "capture": {
+        "path": "/preview/collections/new",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "fill": {
+              "selector": "input[placeholder=\"e.g. Summer Essentials\"]",
+              "value": "Summer Essentials"
+            }
+          },
+          {
+            "wait": 300
+          }
+        ]
+      },
+      "body": "Under **How are products added?**, pick the membership type. **Manual** lets you hand-pick each product. **Automatic** builds the collection from conditions like tag, product type, or price, so new matching products join on their own. You can always switch later.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 640,
+          "y": 200,
+          "w": 300,
+          "kicker": "Step 2",
+          "step": true,
+          "text": "<b>Manual</b> means you pick each product; <b>automatic</b> adds products that match your conditions."
+        },
+        {
+          "type": "highlight",
+          "at": "text=How are products added?",
+          "pad": 10
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Pick the sort signal",
+      "capture": {
+        "path": "/preview/collections/new",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "fill": {
+              "selector": "input[placeholder=\"e.g. Summer Essentials\"]",
+              "value": "Summer Essentials"
+            }
+          },
+          {
+            "wait": 300
+          }
+        ]
+      },
+      "body": "Under **Sort products by**, choose the signal qSortBy uses to rank the collection. **Best sellers** orders by units sold; other options rank by CTR, revenue, how new a product is, inventory, or trending momentum. This is the heart of the sort rule.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 600,
+          "y": 240,
+          "w": 300,
+          "kicker": "Step 3",
+          "step": true,
+          "text": "Pick the ranking signal. <b>Best sellers</b> orders by units sold."
+        },
+        {
+          "type": "anchor",
+          "id": "a3",
+          "at": "select:has(option[value=\"BEST_SELLERS\"])"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c3"
+          },
+          "to": {
+            "ref": "a3"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "magnifier",
+          "at": "select:has(option[value=\"BEST_SELLERS\"])",
+          "mag": 2,
+          "shape": "rect"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "heading": "Confirm and create",
+      "capture": {
+        "path": "/preview/collections/new",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "fill": {
+              "selector": "input[placeholder=\"e.g. Summer Essentials\"]",
+              "value": "Summer Essentials"
+            }
+          },
+          {
+            "wait": 300
+          }
+        ]
+      },
+      "body": "The **In plain words** panel restates your choices in a single sentence so you can sanity-check the rule before saving. When it reads the way you want, select **Create collection** to save it and start sorting.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c4",
+          "x": 600,
+          "y": 210,
+          "w": 300,
+          "kicker": "Step 4",
+          "step": true,
+          "text": "Read the plain-words summary, then select <b>Create collection</b> to save."
+        },
+        {
+          "type": "highlight",
+          "at": "text=In plain words",
+          "pad": 12
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "You can revisit the sort rule any time from the collection's Setup tab."
+        }
+      ]
+    }
+  ],
+  "outro": "That's a collection created: named, populated by manual or automatic membership, and wired to a sort signal. qSortBy now keeps it ordered for you."
+}

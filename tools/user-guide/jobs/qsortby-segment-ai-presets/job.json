@@ -1,0 +1,152 @@
+{
+  "title": "Fast starts: describe your shoppers to AI, or start from a preset",
+  "slug": "qsortby-segment-ai-presets",
+  "publish": {
+    "app": "qsortby",
+    "section": "4-personalization",
+    "order": 20,
+    "file": "ai-and-presets",
+    "description": "Two quick ways to create a segment rule: describe your shoppers in plain English for AI to build, or start from a ready-made preset."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "You don't have to build a rule by hand. qSortBy offers two fast starts: describe your shoppers in plain English and let AI create the groups for you, or pick a ready-made preset and tweak it. This guide walks through both.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Describe your shoppers to AI",
+      "capture": {
+        "path": "/preview/segment-rules/new?start=ai",
+        "wait": "networkidle"
+      },
+      "body": "Open **Segment Rules** from the left menu, then **Create segment rule**. With the **Describe your shoppers** start, you just type who you want to reach and what they should see — for example, *reward repeat buyers with categories they love, and show new visitors my best sellers*. Write it the way you'd explain it to a colleague; AI turns it into shopper groups and ranking signals.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 320,
+          "kicker": "Find it",
+          "step": true,
+          "text": "Open <b>Segment Rules</b> from the left menu, then <b>Create segment rule</b> — this is the <b>Describe your shoppers</b> start."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Segment Rules\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Segment Rules\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Generate the rule",
+      "capture": {
+        "path": "/preview/segment-rules/new?start=ai",
+        "wait": "networkidle"
+      },
+      "body": "Select **Generate** and AI builds the shopper groups, audience conditions, and ranking signals from your description. Everything it creates is fully editable — treat it as a strong first draft, then fine-tune any group by hand. Prefer to keep going yourself? Select **or build it manually** instead.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 640,
+          "y": 250,
+          "w": 320,
+          "kicker": "Step 2",
+          "step": true,
+          "text": "Select <b>Generate</b> — AI drafts the groups and signals, and you can edit anything afterward."
+        },
+        {
+          "type": "anchor",
+          "id": "a2",
+          "at": "button:has-text(\"Generate\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c2"
+          },
+          "to": {
+            "ref": "a2"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "magnifier",
+          "at": "button:has-text(\"Generate\")",
+          "mag": 2.4,
+          "shape": "circle"
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "Use Refine writing to tidy your description before generating, or Suggest to name the rule."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Or start from a preset",
+      "capture": {
+        "path": "/preview/segment-rules/new?start=preset",
+        "wait": "networkidle"
+      },
+      "body": "Prefer a proven starting point? The **preset** start loads a ready-made shopper group — here, **Returning customers** — already wired with audience conditions and ranking signals. Use **Start from a template** to swap in another preset, then adjust the audience and signals to fit your store.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 610,
+          "y": 210,
+          "w": 320,
+          "kicker": "Step 3",
+          "step": true,
+          "text": "A preset arrives pre-built. Use <b>Start from a template</b> to swap it, then tweak to fit."
+        },
+        {
+          "type": "anchor",
+          "id": "a3",
+          "at": "text=Start from a template"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c3"
+          },
+          "to": {
+            "ref": "a3"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    }
+  ],
+  "outro": "Both fast starts drop you into the same editor: AI builds from your description, presets give you a proven template. From here you can adjust every group, or switch to building from scratch for full control."
+}

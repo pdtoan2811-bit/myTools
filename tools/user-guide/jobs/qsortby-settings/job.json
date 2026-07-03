@@ -1,0 +1,162 @@
+{
+  "title": "Configure app settings",
+  "slug": "qsortby-settings",
+  "publish": {
+    "app": "qsortby",
+    "section": "6-settings",
+    "order": 10,
+    "file": "settings",
+    "description": "Set your timezone and language, turn on event tracking and Emotional AI, and check metadata coverage, the web pixel, and your plan."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "The **Settings** page controls how qSortBy tracks behaviour, understands your products, and runs on your store. This guide covers the regional basics, event tracking, Emotional AI, product metadata coverage, and the status of your web pixel and plan.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Set your region and turn on tracking",
+      "capture": {
+        "path": "/preview/settings",
+        "wait": "networkidle"
+      },
+      "body": "Open **Settings** from the left menu. Start with the basics: pick your **timezone** and **language** so schedules and reports line up with your store. Then enable **Event tracking** — this installs a **web pixel** that records views, clicks and dwell, and unlocks **Autopilot**, which lets the app suggest the best sort signal for you.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 300,
+          "kicker": "Find it",
+          "step": true,
+          "text": "Open <b>Settings</b> from the left menu, then set <b>timezone</b> and <b>language</b> and switch on <b>Event tracking</b>."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Settings\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Settings\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "The web pixel is required for CTR and dwell signals — without it, qSortBy can only sort on sales data."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Enable Emotional AI",
+      "capture": {
+        "path": "/preview/settings",
+        "wait": "networkidle"
+      },
+      "body": "Turn on **Emotional AI** to let qSortBy read the *feel* of a product — its imagery and language — and factor that into ranking alongside hard sales numbers. It's most useful for lifestyle and fashion catalogs where presentation drives clicks.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 660,
+          "y": 300,
+          "w": 300,
+          "kicker": "Step 2",
+          "step": true,
+          "text": "<b>Emotional AI</b> factors a product's imagery and tone into ranking — great for lifestyle and fashion catalogs."
+        },
+        {
+          "type": "anchor",
+          "id": "a2",
+          "at": "text=Emotional AI"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c2"
+          },
+          "to": {
+            "ref": "a2"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "magnifier",
+          "at": ".Polaris-Layout__AnnotatedSection:has-text(\"Emotional AI\") .Polaris-Badge",
+          "mag": 2.4,
+          "shape": "circle"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Check metadata coverage and excluded products",
+      "capture": {
+        "path": "/preview/settings",
+        "wait": "networkidle"
+      },
+      "body": "**Product metadata coverage** shows how many of your products carry the taxonomy data qSortBy uses — the higher the coverage, the smarter the sorts. Below it, **Excluded products** lists items you've told the app to leave out of ranking entirely (for example, staff picks you always want pinned).",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 680,
+          "y": 320,
+          "w": 320,
+          "kicker": "Step 3",
+          "step": true,
+          "text": "Higher <b>metadata coverage</b> means smarter sorts. <b>Excluded products</b> are left out of ranking on purpose."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "heading": "Confirm pixel, notifications and plan",
+      "capture": {
+        "path": "/preview/settings",
+        "wait": "networkidle"
+      },
+      "body": "Finish by checking the housekeeping: the **web pixel status** confirms tracking is live, **Notifications** controls the alerts qSortBy sends you, and **Current plan** shows the tier you're on with a link to change it. A green pixel status and an active plan mean you're fully set up.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c4",
+          "x": 680,
+          "y": 640,
+          "w": 320,
+          "kicker": "Step 4",
+          "step": true,
+          "text": "Confirm the <b>web pixel</b> is live, tune <b>Notifications</b>, and review your <b>Current plan</b>."
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "If the web pixel shows as inactive, re-enable Event tracking in Step 1 — the pixel installs automatically."
+        }
+      ]
+    }
+  ],
+  "outro": "With region, tracking, Emotional AI and metadata coverage set — and the pixel and plan confirmed — qSortBy has everything it needs to rank your collections accurately."
+}

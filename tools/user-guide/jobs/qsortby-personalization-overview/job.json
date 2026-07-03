@@ -1,0 +1,135 @@
+{
+  "title": "Personalization overview: show the right products to the right shoppers",
+  "slug": "qsortby-personalization-overview",
+  "publish": {
+    "app": "qsortby",
+    "section": "4-personalization",
+    "order": 10,
+    "file": "overview",
+    "description": "What segment rules do, how the rule list and Published/Draft status work, and where to create your first rule."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "Personalization lets qSortBy show a different product order to different shoppers — repeat buyers see the categories they love, first-time visitors see your best sellers. You do this with segment rules. This overview covers the rule list, what Published vs Draft means, and how to start a new rule.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Meet the Segment Rules list",
+      "capture": {
+        "path": "/preview/segment-rules",
+        "wait": "networkidle"
+      },
+      "body": "Open **Segment Rules** from the left menu. Each rule reorders your collections based on **who** is shopping — its own audience conditions and ranking signals. The list shows every rule you've built, with its **status**, how many **shopper groups** it targets, and when it was last updated.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 310,
+          "kicker": "Find it",
+          "step": true,
+          "text": "Open <b>Segment Rules</b> from the left menu — each rule shows shoppers the product order most likely to convert them."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Segment Rules\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Segment Rules\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "These are mocked preview rules — your own rules appear here once the app is installed."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Published vs Draft",
+      "capture": {
+        "path": "/preview/segment-rules",
+        "wait": "networkidle"
+      },
+      "body": "Every rule carries a **status**. A **Published** rule is live and personalizing your storefront right now. A **Draft** is saved but not yet affecting shoppers — build and refine it safely until you're ready. Use the **All / Published / Draft** filters above the table to focus the list.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 640,
+          "y": 470,
+          "w": 320,
+          "kicker": "Status",
+          "step": true,
+          "text": "<b>Published</b> is live for shoppers. <b>Draft</b> is saved but not affecting your store yet."
+        },
+        {
+          "type": "magnifier",
+          "at": ".Polaris-Badge:has-text(\"Published\")",
+          "mag": 2.4,
+          "shape": "circle"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Start a new rule",
+      "capture": {
+        "path": "/preview/segment-rules",
+        "wait": "networkidle"
+      },
+      "body": "Select **Create segment rule** in the top-right to begin. qSortBy asks how you'd like to start: **describe your shoppers to AI** and let it build the groups, pick a **ready-made preset**, or **build from scratch** by hand. Whichever you choose, you land in the same rule editor and can adjust everything afterward.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 560,
+          "y": 150,
+          "w": 320,
+          "kicker": "Step 1",
+          "step": true,
+          "text": "Select <b>Create segment rule</b>, then pick a start method: AI, a preset, or from scratch."
+        },
+        {
+          "type": "anchor",
+          "id": "a3",
+          "at": "button:has-text(\"Create segment rule\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c3"
+          },
+          "to": {
+            "ref": "a3"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    }
+  ],
+  "outro": "That's the lay of the land: a list of segment rules, each Published (live) or Draft (safe to edit), and a single Create segment rule entry that offers three ways to start. Next, pick the start method that suits you."
+}

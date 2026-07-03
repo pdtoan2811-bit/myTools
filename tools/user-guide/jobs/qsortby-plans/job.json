@@ -1,0 +1,152 @@
+{
+  "title": "Choose your plan",
+  "slug": "qsortby-plans",
+  "publish": {
+    "app": "qsortby",
+    "section": "6-settings",
+    "order": 20,
+    "file": "plans-billing",
+    "description": "Compare the Starter, Growth, Pro and Enterprise tiers, spot the Most popular plan, and start your 7-day free trial."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "The **Plans** page lays out qSortBy's four tiers side by side. This guide helps you compare them, understand the free trial, and pick the plan that fits your store.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Compare the tiers",
+      "capture": {
+        "path": "/preview/plans",
+        "wait": "networkidle"
+      },
+      "body": "Open **Plans & Billing** from the left menu. qSortBy comes in four tiers — **Starter**, **Growth**, **Pro** and **Enterprise** — shown side by side with what each includes. Read down a column to see how collection limits, signals and automation scale as you move up.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 300,
+          "kicker": "Find it",
+          "step": true,
+          "text": "Open <b>Plans &amp; Billing</b> from the left menu — the four tiers sit side by side."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Plans & Billing\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Plans & Billing\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Spot the most popular plan",
+      "capture": {
+        "path": "/preview/plans",
+        "wait": "networkidle"
+      },
+      "body": "One tier is badged **Most popular** — it's the plan most stores land on because it balances price against the signals and automation most catalogs need. It's a safe default if you're unsure where to start.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 640,
+          "y": 300,
+          "w": 300,
+          "kicker": "Recommended",
+          "step": true,
+          "text": "The <b>Most popular</b> badge marks the tier most stores choose — a solid default if you're unsure."
+        },
+        {
+          "type": "anchor",
+          "id": "a2",
+          "at": "text=Most popular"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c2"
+          },
+          "to": {
+            "ref": "a2"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "magnifier",
+          "at": ".Polaris-Badge:has-text(\"Most popular\")",
+          "mag": 2.4,
+          "shape": "circle"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Start your free trial",
+      "capture": {
+        "path": "/preview/plans",
+        "wait": "networkidle"
+      },
+      "body": "Every paid tier opens with a **7-day free trial**, so you can try qSortBy on your real catalog before you're billed. Select **Start 7-day free trial** on the plan you want — you can switch tiers later from **Settings → Current plan**.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 640,
+          "y": 520,
+          "w": 320,
+          "kicker": "Step 1",
+          "step": true,
+          "text": "Select <b>Start 7-day free trial</b> on your chosen plan — nothing is billed for the first 7 days."
+        },
+        {
+          "type": "anchor",
+          "id": "a3",
+          "at": "button:has-text(\"Start 7-day free trial\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c3"
+          },
+          "to": {
+            "ref": "a3"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "You can change or cancel your plan any time from Settings — the trial only starts billing once it ends."
+        }
+      ]
+    }
+  ],
+  "outro": "That's plans and billing: compare the four tiers, lean on the Most popular badge if you're unsure, and start risk-free with the 7-day free trial."
+}

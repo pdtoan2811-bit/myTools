@@ -1,0 +1,156 @@
+{
+  "title": "Manage your collections",
+  "slug": "qsortby-collections-manage",
+  "publish": {
+    "app": "qsortby",
+    "section": "3-collections",
+    "order": 10,
+    "file": "manage-collections",
+    "description": "Read the collections list — source tabs, status badges, stat tiles, and the row actions that run or pause a sort."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "The Collections page is where you see everything qSortBy touches in one place. This guide walks through the source tabs, the status badges, the stat tiles up top, and the row actions you use to run or pause a sort.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Read the stat tiles and source tabs",
+      "capture": {
+        "path": "/preview/collections",
+        "wait": "networkidle"
+      },
+      "body": "Open **Collections** from the left menu. The tiles across the top summarise how qSortBy is doing — collections managed, average CTR, auto-sorts run, and revenue influenced. Below them, the source tabs split your collections by origin: **All**, **From Shopify**, **From qSortBy**, and **Smart collections**. Start on **All** to see the full list.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 300,
+          "kicker": "Find it",
+          "step": true,
+          "text": "Open <b>Collections</b> from the left menu — every collection qSortBy touches, in one list."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Collections\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Collections\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "These are mocked preview numbers — your store's real metrics appear once the app is installed."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Check each collection's status",
+      "capture": {
+        "path": "/preview/collections",
+        "wait": "networkidle"
+      },
+      "body": "Every row carries a status badge so you know what qSortBy is doing with it: **Live** means it's sorting on schedule, **Paused** means sorting is on hold, **Draft** means it isn't set up yet, and **Archived** means it's retired. Scan the badge column to spot anything that needs attention.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 600,
+          "y": 200,
+          "w": 320,
+          "kicker": "Status",
+          "step": true,
+          "text": "<b>Live</b> is sorting, <b>Paused</b> is on hold, <b>Draft</b> isn't set up yet, and <b>Archived</b> is retired."
+        },
+        {
+          "type": "magnifier",
+          "at": ".Polaris-Badge:has-text(\"Live\")",
+          "mag": 2.4,
+          "shape": "circle"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Run or pause from the row menu",
+      "capture": {
+        "path": "/preview/collections",
+        "wait": "networkidle"
+      },
+      "body": "Each row has an overflow menu (the **•••** button) with quick actions. Choose **Run now** to trigger an immediate re-sort, or **Pause** to stop automatic sorting without losing the collection's setup. You can resume any time.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 600,
+          "y": 230,
+          "w": 320,
+          "kicker": "Row actions",
+          "step": true,
+          "text": "Open the <b>•••</b> menu on any row for <b>Run now</b> and <b>Pause</b>."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "heading": "Create a new collection",
+      "capture": {
+        "path": "/preview/collections",
+        "wait": "networkidle"
+      },
+      "body": "When you're ready to add one, select **Create collection** in the top-right. qSortBy walks you through naming it, choosing how products join, and picking the sort rule.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c4",
+          "x": 560,
+          "y": 150,
+          "w": 300,
+          "kicker": "Next",
+          "step": true,
+          "text": "Select <b>Create collection</b> to add a new one."
+        },
+        {
+          "type": "anchor",
+          "id": "a4",
+          "at": "button:has-text(\"Create collection\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c4"
+          },
+          "to": {
+            "ref": "a4"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    }
+  ],
+  "outro": "That's the collections list: the tiles tell you how sorting is performing, the tabs and badges help you find any collection fast, and the row menu lets you run or pause a sort in one click."
+}

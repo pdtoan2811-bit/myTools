@@ -43,9 +43,11 @@ const status = (state, extra = {}) => writeFileSync(join(jobDir, 'status.json'),
 // ---- 1. capture -----------------------------------------------------------
 async function capture() {
   const pw = await import(PW).then((m) => m.default || m);
-  const vp = job.viewport || { width: 1280, height: 800 };
+  const vp = job.viewport || { width: 1280, height: 760 };
   const browser = await pw.chromium.launch();
-  const ctx = await browser.newContext({ viewport: vp, deviceScaleFactor: 2, storageState: job.storageState ? join(jobDir, job.storageState) : undefined });
+  // deviceScaleFactor 3 → the app screenshot carries 3× the source pixels, so the app's
+  // own text stays crisp after it's fit into the slide. (Bumped from 2 for the readability revamp.)
+  const ctx = await browser.newContext({ viewport: vp, deviceScaleFactor: 3, storageState: job.storageState ? join(jobDir, job.storageState) : undefined });
   const page = await ctx.newPage();
   for (const step of job.steps) {
     if (!step.capture) continue;
@@ -86,7 +88,7 @@ function buildGuide() {
     let frameEl = null;
     if (existsSync(capPath)) {
       const buf = readFileSync(capPath); const { w: nw, h: nh } = pngSize(buf);
-      const fit = Math.min((CW * 0.96) / nw, (CH * 0.96) / nh);
+      const fit = Math.min((CW * 0.99) / nw, (CH * 0.99) / nh);
       const w = Math.round(nw * fit), h = Math.round(nh * fit);
       const f = step.frame || {};
       frameEl = {

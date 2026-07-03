@@ -1,0 +1,164 @@
+{
+  "title": "Preview and test a sort",
+  "slug": "qsortby-preview-test",
+  "publish": {
+    "app": "qsortby",
+    "section": "3-collections",
+    "order": 40,
+    "file": "preview-and-test",
+    "description": "Do a dry run on the Preview & test tab — compare current and proposed order before anything goes live."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "Before a sort reaches your storefront you can rehearse it. The Preview & test tab runs the rule as a dry run and shows exactly how the order would change — with nothing published until you apply it.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Open Preview & test",
+      "capture": {
+        "path": "/preview/collections/c-1001",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "click": ".Polaris-Tabs__Tab:visible:has-text(\"Preview & test\")"
+          },
+          {
+            "wait": 600
+          }
+        ]
+      },
+      "body": "Left menu → **Collections** → open a collection → the **Preview & test** tab. qSortBy runs a **dry run** — it calculates the new order using your sort rule without touching what shoppers currently see.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 320,
+          "kicker": "Find it",
+          "step": true,
+          "text": "Left menu → <b>Collections</b> → open a collection → the <b>Preview & test</b> tab for a safe dry run."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Collections\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Collections\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Tabs__Tab:has-text(\"Preview & test\")",
+          "pad": 4
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Compare current and proposed order",
+      "capture": {
+        "path": "/preview/collections/c-1001",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "click": ".Polaris-Tabs__Tab:visible:has-text(\"Preview & test\")"
+          },
+          {
+            "wait": 600
+          }
+        ]
+      },
+      "body": "The two columns sit side by side: **Current order** is what's live now, and **Proposed order** is what the sort rule would produce. Read them together to see which products rise and which fall.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 110,
+          "y": 120,
+          "w": 300,
+          "kicker": "Compare",
+          "step": true,
+          "text": "<b>Current order</b> is live now; <b>Proposed order</b> is what the rule would produce."
+        },
+        {
+          "type": "anchor",
+          "id": "a2",
+          "at": "text=Proposed order"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c2"
+          },
+          "to": {
+            "ref": "a2"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Read the move badges",
+      "capture": {
+        "path": "/preview/collections/c-1001",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "click": ".Polaris-Tabs__Tab:visible:has-text(\"Preview & test\")"
+          },
+          {
+            "wait": 600
+          }
+        ]
+      },
+      "body": "Each product in the proposed column carries a **▲** or **▼** badge showing how many spots it moves up or down. Nothing publishes to your storefront until you apply the sort, so you can test freely and only commit when the result looks right.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 110,
+          "y": 130,
+          "w": 320,
+          "kicker": "Safe to test",
+          "step": true,
+          "text": "<b>▲</b>/<b>▼</b> badges show how far each product moves. Nothing goes live until you apply it."
+        },
+        {
+          "type": "magnifier",
+          "at": ".Polaris-Badge:has-text(\"▲\")",
+          "mag": 2.4,
+          "shape": "circle"
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "Re-run the preview after editing the sort rule to see the effect of your change before committing."
+        }
+      ]
+    }
+  ],
+  "outro": "Preview & test lets you rehearse any sort risk-free: dry-run the rule, compare current against proposed, read the move badges, and apply only when you're happy."
+}

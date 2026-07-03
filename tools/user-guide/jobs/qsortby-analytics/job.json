@@ -1,0 +1,157 @@
+{
+  "title": "Analytics: the Overview dashboard",
+  "slug": "qsortby-analytics",
+  "publish": {
+    "app": "qsortby",
+    "section": "5-analytics",
+    "order": 10,
+    "file": "analytics-dashboard",
+    "description": "Read the Analytics Overview — headline metric cards, the date range, and the per-collection performance table with CTR trend and uplift."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "The Analytics section shows what qSortBy is doing for your store. Its Overview tab rolls everything up: headline metrics at the top and a per-collection breakdown below. This guide walks through the cards, the date range, and the performance table.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Read the headline metrics",
+      "capture": {
+        "path": "/preview/analytics",
+        "wait": "networkidle"
+      },
+      "body": "Open **Analytics** from the left navigation. The Overview opens on four metric cards: **Collections managed**, **Avg. collection CTR**, **Auto-sorts run**, and **Revenue influenced**. Each shows its current value plus the change versus the previous period, so you can see the trend at a glance.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 300,
+          "kicker": "Find it",
+          "step": true,
+          "text": "Open <b>Analytics</b> from the left menu — the four cards summarize collections managed, average CTR, auto-sorts run, and revenue influenced."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Analytics\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Analytics\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "These are mocked preview numbers — your store's real figures appear once qSortBy is installed and collecting data."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Set the date range",
+      "capture": {
+        "path": "/preview/analytics",
+        "wait": "networkidle"
+      },
+      "body": "Every number on the page is scoped to a **date range** — shown here as **Last 30 days**. Change it to compare a busy launch week against a quieter month, or to check performance over a longer window. The cards and the table below both update together.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 620,
+          "y": 150,
+          "w": 300,
+          "kicker": "Time window",
+          "step": true,
+          "text": "<b>Last 30 days</b> sets the window for every metric and every row in the table."
+        },
+        {
+          "type": "anchor",
+          "id": "a2",
+          "at": "text=Last 30 days"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c2"
+          },
+          "to": {
+            "ref": "a2"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Compare collections in the table",
+      "capture": {
+        "path": "/preview/analytics",
+        "wait": "networkidle"
+      },
+      "body": "**Performance by collection** breaks the totals down row by row. Each collection shows its live signal, **CTR (30d)** with a sparkline **CTR trend**, views, revenue, and an **Uplift** figure — how much better it's doing since qSortBy took over sorting. Click any column header to sort by it.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 130,
+          "y": 150,
+          "w": 300,
+          "kicker": "Drill in",
+          "step": true,
+          "text": "Each row shows CTR, trend, revenue and <b>Uplift</b> — the gain since qSortBy started sorting. Click a header to re-sort."
+        },
+        {
+          "type": "anchor",
+          "id": "a3",
+          "at": "text=Performance by collection"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c3"
+          },
+          "to": {
+            "ref": "a3"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "highlight",
+          "at": "text=Uplift",
+          "pad": 8
+        },
+        {
+          "type": "magnifier",
+          "at": ".Polaris-Badge:has-text(\"+2.0pt\")",
+          "mag": 2.4,
+          "shape": "circle"
+        }
+      ]
+    }
+  ],
+  "outro": "That's the Analytics Overview: four headline cards, a date range that scopes the whole view, and a per-collection table where Uplift shows exactly what qSortBy's sorting is adding. Use the tabs at the top to dig into Customer events and the live Event log."
+}

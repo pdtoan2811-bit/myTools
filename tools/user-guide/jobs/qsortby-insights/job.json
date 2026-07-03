@@ -1,0 +1,181 @@
+{
+  "title": "Insights: emotions, heatmap, and customer journey",
+  "slug": "qsortby-insights",
+  "publish": {
+    "app": "qsortby",
+    "section": "5-analytics",
+    "order": 30,
+    "file": "customer-insights",
+    "description": "Tour qSortBy's three Insights tabs — Customer Emotions with an AI summary, the Customer Heatmap, and the Customer Journey funnel."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "The Insights section reads the story behind your traffic. Three tabs each take a different angle: how shoppers feel, when they're active, and the paths they take through your store. This guide tours all three.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "See how shoppers feel",
+      "capture": {
+        "path": "/preview/insights",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "click": ".Polaris-Tabs__Tab:visible:has-text(\"Customer Emotions\")"
+          },
+          {
+            "wait": 600
+          }
+        ]
+      },
+      "body": "Open **Insights** from the left navigation — it opens on the **Customer Emotions** tab (*Left menu → Insights → Customer Emotions*). It classifies sessions across twelve emotional states — from excited and content to confused and frustrated — each with its share and change over time. Above the grid, an **AI summary** reads the pattern in plain language and points out what's driving conversions.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 300,
+          "kicker": "Find it",
+          "step": true,
+          "text": "Open <b>Insights</b> from the left menu — it opens on <b>Customer Emotions</b>: twelve states ranked by share, with an <b>AI summary</b> that reads the pattern."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Insights\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Insights\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Tabs__Tab:has-text(\"Customer Emotions\")",
+          "pad": 4
+        },
+        {
+          "type": "magnifier",
+          "at": ".Polaris-Badge:has-text(\"Excited\")",
+          "mag": 2.4,
+          "shape": "circle"
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "These are mocked preview sessions — real emotional classifications appear once qSortBy is installed and observing traffic."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Find your busy hours",
+      "capture": {
+        "path": "/preview/insights",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "click": ".Polaris-Tabs__Tab:visible:has-text(\"Customer Heatmap\")"
+          },
+          {
+            "wait": 600
+          }
+        ]
+      },
+      "body": "**Customer Heatmap** plots activity as a day-by-hour grid — each cell darker where more shoppers were active. It's the quickest way to spot your peak windows, so you can time a re-sort, a launch, or a promotion for when the most people are watching.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 480,
+          "y": 150,
+          "w": 300,
+          "kicker": "When they shop",
+          "step": true,
+          "text": "A <b>day × hour</b> grid — darker cells mark your busiest windows across the week."
+        },
+        {
+          "type": "anchor",
+          "id": "a2",
+          "at": ".Polaris-Tabs__Tab:has-text(\"Customer Heatmap\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c2"
+          },
+          "to": {
+            "ref": "a2"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Trace the customer journey",
+      "capture": {
+        "path": "/preview/insights",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "click": ".Polaris-Tabs__Tab:visible:has-text(\"Customer Journey\")"
+          },
+          {
+            "wait": 600
+          }
+        ]
+      },
+      "body": "**Customer Journey** shows the funnel from first visit to purchase, with the drop-off at each stage, plus the **common paths** shoppers take through your store. Use it to see where people fall out and which routes convert best — then sort the collections on those routes accordingly.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 480,
+          "y": 150,
+          "w": 300,
+          "kicker": "The path",
+          "step": true,
+          "text": "A conversion <b>funnel</b> plus the most common paths — spot where shoppers drop off."
+        },
+        {
+          "type": "anchor",
+          "id": "a3",
+          "at": ".Polaris-Tabs__Tab:has-text(\"Customer Journey\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c3"
+          },
+          "to": {
+            "ref": "a3"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    }
+  ],
+  "outro": "That's Insights: Customer Emotions for how shoppers feel, Customer Heatmap for when they're active, and Customer Journey for the paths they take. Read together, they tell you which collections to sort, and when, to meet shoppers at their best."
+}

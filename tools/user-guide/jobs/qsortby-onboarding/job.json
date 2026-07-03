@@ -1,0 +1,190 @@
+{
+  "title": "Onboarding: the 5-step setup wizard",
+  "slug": "qsortby-onboarding",
+  "publish": {
+    "app": "qsortby",
+    "section": "1-getting-started",
+    "order": 40,
+    "file": "onboarding",
+    "description": "Walk through qSortBy's guided setup wizard — track your progress, pick a sort signal, and tick off the launch checklist."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "When you first install qSortBy, a short setup wizard gets your store sorting in five guided steps. This guide walks through how the wizard tracks your progress, the controls on each step, the launch checklist, and how to move between steps.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Follow your progress",
+      "capture": {
+        "path": "/preview/onboarding",
+        "wait": "networkidle"
+      },
+      "body": "The wizard runs across five steps. The header shows exactly where you are — **Step 3 of 5** — with a progress bar and a percentage so you always know how much is left. Each step focuses on one decision, so there's nothing to configure all at once.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 660,
+          "y": 180,
+          "w": 300,
+          "kicker": "Where you are",
+          "step": true,
+          "text": "The wizard tracks your setup across <b>5 steps</b>. The <b>Step 3 of 5</b> label and the bar fill as you complete each one."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-ProgressBar",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-ProgressBar"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "magnifier",
+          "at": "text=Step 3 of 5",
+          "mag": 2.4,
+          "shape": "circle"
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "This is a mocked preview — in your store the wizard opens the first time you launch qSortBy."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Set the controls for the step",
+      "capture": {
+        "path": "/preview/onboarding",
+        "wait": "networkidle"
+      },
+      "body": "Each step gives you just the controls it needs. Here on **Create your first sort rule**, you pick a **Collection** and a **Sort signal** — best sellers, highest CTR, highest revenue, newest, trending, and more. Make your choice, and the wizard remembers it as you move on.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 620,
+          "y": 150,
+          "w": 300,
+          "kicker": "Make a choice",
+          "step": true,
+          "text": "Pick a <b>Collection</b> and the <b>Sort signal</b> to rank it by — best sellers, CTR, revenue, and more."
+        },
+        {
+          "type": "anchor",
+          "id": "a2",
+          "at": "text=Create your first sort rule"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c2"
+          },
+          "to": {
+            "ref": "a2"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Tick off the launch checklist",
+      "capture": {
+        "path": "/preview/onboarding",
+        "wait": "networkidle"
+      },
+      "body": "The **Checklist** in the sidebar lists everything needed to go live — connect your store data, enable event tracking, create your first sort rule, choose a schedule, and pick a plan. It stays visible on every step so you can see what's done and what's left.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 120,
+          "y": 150,
+          "w": 300,
+          "kicker": "What's left",
+          "step": true,
+          "text": "The <b>Checklist</b> shows every launch task — it fills in as you complete each step."
+        },
+        {
+          "type": "anchor",
+          "id": "a3",
+          "at": "text=Checklist"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c3"
+          },
+          "to": {
+            "ref": "a3"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "heading": "Move between steps",
+      "capture": {
+        "path": "/preview/onboarding",
+        "wait": "networkidle"
+      },
+      "body": "When you're happy with a step, select **Continue** to save it and advance. **Back** returns to the previous step if you need to change something — nothing is locked in until you finish. Work through all five and qSortBy starts sorting automatically.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c4",
+          "x": 620,
+          "y": 620,
+          "w": 300,
+          "kicker": "Advance",
+          "step": true,
+          "text": "<b>Continue</b> saves the step and moves on; <b>Back</b> lets you revisit an earlier choice."
+        },
+        {
+          "type": "anchor",
+          "id": "a4",
+          "at": "button:has-text(\"Continue\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c4"
+          },
+          "to": {
+            "ref": "a4"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    }
+  ],
+  "outro": "That's the setup wizard: five focused steps, a progress bar and checklist to keep you oriented, and Back/Continue to move at your own pace. Finish all five and qSortBy begins re-ranking your collections automatically."
+}

@@ -1,0 +1,179 @@
+{
+  "title": "Read your product catalog",
+  "slug": "qsortby-products",
+  "publish": {
+    "app": "qsortby",
+    "section": "3-collections",
+    "order": 70,
+    "file": "products-catalog",
+    "description": "Tour the Products page — stat tiles, saved views, the Rank by control, filters, and every performance column."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "The **Products** page is your full catalog with the sales signals qSortBy uses to rank collections. This guide walks you through the stat tiles, saved views, the Rank by control, filters and search, and what each performance column tells you.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "See your catalog at a glance",
+      "capture": {
+        "path": "/preview/products",
+        "wait": "networkidle"
+      },
+      "body": "Open **Products** from the left navigation. The tiles across the top count your whole catalog by status — **Products** (the total), plus **Active**, **Draft** and **Archived**. It's the fastest way to spot how many listings are live versus sitting unpublished.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 300,
+          "kicker": "Find it",
+          "step": true,
+          "text": "Open <b>Products</b> from the left menu — your full catalog, ranked by sales signals."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Products\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Products\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "These are mocked preview numbers — your store's real counts appear once the app is installed."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Switch between saved views",
+      "capture": {
+        "path": "/preview/products",
+        "wait": "networkidle"
+      },
+      "body": "The tabs above the table are **saved views** that pre-filter the catalog: **All products**, **High performers**, **Underperformers**, **Low stock**, and **New this season**. Select one to instantly focus on the products that need attention — for example, **Underperformers** surfaces listings that may be dragging a collection down.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 560,
+          "y": 140,
+          "w": 300,
+          "kicker": "Step 1",
+          "step": true,
+          "text": "Pick a <b>saved view</b> to pre-filter the catalog — try <b>High performers</b> or <b>Underperformers</b>."
+        },
+        {
+          "type": "anchor",
+          "id": "a2",
+          "at": "text=High performers"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c2"
+          },
+          "to": {
+            "ref": "a2"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Rank, filter and search",
+      "capture": {
+        "path": "/preview/products",
+        "wait": "networkidle"
+      },
+      "body": "Use **Rank by** to reorder the table by a single signal — best selling, views, CTR and more — so the strongest (or weakest) products rise to the top. Narrow the list further with the **Status** and **Category** filters, or type in **Search products** to jump straight to one listing.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 640,
+          "y": 250,
+          "w": 300,
+          "kicker": "Step 2",
+          "step": true,
+          "text": "<b>Rank by</b> reorders the table by one signal. Add <b>Status</b> / <b>Category</b> filters or <b>Search</b> to narrow it."
+        },
+        {
+          "type": "anchor",
+          "id": "a3",
+          "at": "label:has-text(\"Rank by\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c3"
+          },
+          "to": {
+            "ref": "a3"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "heading": "Read the performance columns",
+      "capture": {
+        "path": "/preview/products",
+        "wait": "networkidle"
+      },
+      "body": "Each row carries the numbers qSortBy sorts on. Alongside **category**, **price**, **inventory** and **status**, you get the engagement signals: **sold** (units), **views**, **CTR** (click-through rate), **dwell** (time on the product), and **rating**. Compare these across rows to understand *why* a product ranks where it does.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c4",
+          "x": 700,
+          "y": 640,
+          "w": 320,
+          "kicker": "Reference",
+          "step": true,
+          "text": "The right-hand columns — <b>sold</b>, <b>views</b>, <b>CTR</b>, <b>dwell</b>, <b>rating</b> — are the signals qSortBy ranks on."
+        },
+        {
+          "type": "magnifier",
+          "at": ".Polaris-Badge",
+          "mag": 2.4,
+          "shape": "circle"
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "A high view count but low CTR often means the listing image or title needs work — a good candidate to review before a sort."
+        }
+      ]
+    }
+  ],
+  "outro": "That's the Products page: tiles for a status snapshot, saved views to focus, Rank by and filters to reorder, and performance columns that explain every ranking. It's the source of truth behind how qSortBy orders your collections."
+}

@@ -1,0 +1,152 @@
+{
+  "title": "Edit your product taxonomy",
+  "slug": "qsortby-taxonomy",
+  "publish": {
+    "app": "qsortby",
+    "section": "6-settings",
+    "order": 30,
+    "file": "product-taxonomy",
+    "description": "Define the dimensions qSortBy sorts on — Category, Material, Season, Occasion, Fit — with their metafield keys, allowed values, and coverage bars."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "The **Product taxonomy** editor defines the dimensions qSortBy uses to understand and group your catalog. This guide walks you through reading a dimension, adding your own, and saving the taxonomy back to your store.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Read a dimension",
+      "capture": {
+        "path": "/preview/settings/taxonomy",
+        "wait": "networkidle"
+      },
+      "body": "This editor lives one level in: **Left menu → Settings → Product taxonomy**. It ships with five dimensions — **Category**, **Material**, **Season**, **Occasion** and **Fit**. Each maps to a Shopify **metafield key**, is either **single-** or **multi-select**, and lists its **allowed values**. A **catalog-coverage bar** shows how many of your products already carry that data.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 320,
+          "kicker": "Find it",
+          "step": true,
+          "text": "It's a sub-page: <b>Left menu → Settings → Product taxonomy</b>. Each dimension has a <b>metafield key</b>, a <b>single/multi-select</b> kind, <b>allowed values</b>, and a <b>coverage bar</b>."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Settings\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Settings\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "magnifier",
+          "at": ".Polaris-ProgressBar",
+          "mag": 1.8,
+          "shape": "rect"
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "Higher coverage means richer sorts — fill the matching metafields on your products in Shopify admin to raise it."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Add a dimension — or let AI suggest one",
+      "capture": {
+        "path": "/preview/settings/taxonomy",
+        "wait": "networkidle"
+      },
+      "body": "Select **Add dimension** to create your own — give it a name, a metafield key, choose single- or multi-select, and list its allowed values. Short on ideas? Choose **Suggest with AI** and qSortBy proposes dimensions and values based on your actual catalog.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 640,
+          "y": 220,
+          "w": 320,
+          "kicker": "Step 1",
+          "step": true,
+          "text": "<b>Add dimension</b> builds one by hand; <b>Suggest with AI</b> proposes dimensions and values from your catalog."
+        },
+        {
+          "type": "anchor",
+          "id": "a2",
+          "at": "button:has-text(\"Suggest with AI\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c2"
+          },
+          "to": {
+            "ref": "a2"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Save the taxonomy",
+      "capture": {
+        "path": "/preview/settings/taxonomy",
+        "wait": "networkidle"
+      },
+      "body": "When your dimensions look right, select **Save taxonomy**. qSortBy provisions the matching metafield definitions in your Shopify admin so you (or your team) can start filling them in per product — and the coverage bars climb as you do.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 640,
+          "y": 300,
+          "w": 320,
+          "kicker": "Step 2",
+          "step": true,
+          "text": "<b>Save taxonomy</b> provisions the metafield definitions in Shopify admin so you can fill them per product."
+        },
+        {
+          "type": "anchor",
+          "id": "a3",
+          "at": "button:has-text(\"Save taxonomy\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c3"
+          },
+          "to": {
+            "ref": "a3"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
+      ]
+    }
+  ],
+  "outro": "That's the taxonomy editor: read the built-in dimensions, add your own or generate them with AI, then save to provision the metafields. The richer and more complete your taxonomy, the sharper qSortBy's sorting."
+}

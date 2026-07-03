@@ -1,0 +1,154 @@
+{
+  "title": "Choose a sort signal",
+  "slug": "qsortby-sort-signals",
+  "publish": {
+    "app": "qsortby",
+    "section": "3-collections",
+    "order": 30,
+    "file": "sort-signals",
+    "description": "Understand the seven sort signals, the sales window, and the update cadence on a collection's Setup tab."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "A sort rule is built from three choices on the Setup tab: which signal ranks your products, how far back the sales window looks, and how often qSortBy re-sorts. This guide explains all three so you can dial in exactly the ordering you want.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Pick the ranking signal",
+      "capture": {
+        "path": "/preview/collections/c-1001",
+        "wait": "networkidle"
+      },
+      "body": "Left menu → **Collections** → open a collection → the **Setup** tab. Under **Sort products by**, choose one of seven signals: **Best sellers** (units sold), **Highest CTR** (click-through rate), **Highest revenue** (sales value), **Newest** (recently added), **Most inventory** (stock on hand), **Trending** (recent momentum), or **Manual pinning** (a hand-set order). Each ranks the same products differently.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 320,
+          "kicker": "Find it",
+          "step": true,
+          "text": "Left menu → <b>Collections</b> → open a collection → the <b>Setup</b> tab, then pick a signal under <b>Sort products by</b>."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Collections\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Collections\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Tabs__Tab:has-text(\"Setup\")",
+          "pad": 4
+        },
+        {
+          "type": "magnifier",
+          "at": "select:has(option[value=\"BEST_SELLERS\"])",
+          "mag": 2,
+          "shape": "rect"
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "Use Trending to surface fast-rising products, or Best sellers for a steadier, proven order."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Set the sales window",
+      "capture": {
+        "path": "/preview/collections/c-1001",
+        "wait": "networkidle"
+      },
+      "body": "The **Use sales from** window controls how far back qSortBy looks when measuring a signal. A short window reacts quickly to what's selling right now; a longer window smooths out day-to-day swings and favours consistent performers.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 600,
+          "y": 240,
+          "w": 320,
+          "kicker": "Window",
+          "step": true,
+          "text": "A short window reacts to what's hot now; a longer window rewards steady sellers."
+        },
+        {
+          "type": "highlight",
+          "at": "text=Use sales from",
+          "pad": 10
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Choose the update cadence",
+      "capture": {
+        "path": "/preview/collections/c-1001",
+        "wait": "networkidle"
+      },
+      "body": "Decide how often the collection re-sorts. Continuous updates re-rank as sales come in for the freshest order, while an hourly or daily cadence gives a steadier storefront that changes less often. Pick the rhythm that suits your catalogue.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 600,
+          "y": 230,
+          "w": 320,
+          "kicker": "Cadence",
+          "step": true,
+          "text": "Re-sort continuously for the freshest order, or on a daily/hourly schedule for a steadier storefront."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "heading": "Confirm it in plain words",
+      "capture": {
+        "path": "/preview/collections/c-1001",
+        "wait": "networkidle"
+      },
+      "body": "The **In plain words** panel restates your signal, window, and cadence as one readable sentence — a quick way to confirm the rule does what you intend before you save it.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c4",
+          "x": 600,
+          "y": 210,
+          "w": 320,
+          "kicker": "Confirm",
+          "step": true,
+          "text": "The plain-words summary spells out your whole rule in one sentence."
+        },
+        {
+          "type": "highlight",
+          "at": "text=In plain words",
+          "pad": 12
+        }
+      ]
+    }
+  ],
+  "outro": "Signal, sales window, and cadence together define how a collection sorts. Adjust any of the three and the In plain words summary updates so you always know exactly what qSortBy will do."
+}

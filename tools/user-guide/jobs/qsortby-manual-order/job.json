@@ -1,0 +1,147 @@
+{
+  "title": "Hand-curate the order",
+  "slug": "qsortby-manual-order",
+  "publish": {
+    "app": "qsortby",
+    "section": "3-collections",
+    "order": 50,
+    "file": "manual-order",
+    "description": "Use the Manual order tab to hand-curate product order, guided by per-product metrics."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "Sometimes you want the final say on order — a hero product up top, a seasonal push, a merchandising call an algorithm can't make. The Manual order tab lets you arrange products by hand while still showing the metrics behind each one.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Open the Manual order tab",
+      "capture": {
+        "path": "/preview/collections/c-1001",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "click": ".Polaris-Tabs__Tab:visible:has-text(\"Manual order\")"
+          },
+          {
+            "wait": 600
+          }
+        ]
+      },
+      "body": "Left menu → **Collections** → open a collection → the **Manual order** tab. It lists every product in the collection as a table, in the order shoppers currently see.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 320,
+          "kicker": "Find it",
+          "step": true,
+          "text": "Left menu → <b>Collections</b> → open a collection → the <b>Manual order</b> tab to arrange products by hand."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Collections\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Collections\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Tabs__Tab:has-text(\"Manual order\")",
+          "pad": 4
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Arrange products by hand",
+      "capture": {
+        "path": "/preview/collections/c-1001",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "click": ".Polaris-Tabs__Tab:visible:has-text(\"Manual order\")"
+          },
+          {
+            "wait": 600
+          }
+        ]
+      },
+      "body": "Reorder the rows to set the exact sequence you want. This is where you override the algorithm — pin a launch product to the top, or group a promotion together, regardless of what the sales signals suggest.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 110,
+          "y": 130,
+          "w": 320,
+          "kicker": "Curate",
+          "step": true,
+          "text": "Reorder rows to set the exact sequence — your merchandising call overrides the signals."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Let the metrics guide you",
+      "capture": {
+        "path": "/preview/collections/c-1001",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "click": ".Polaris-Tabs__Tab:visible:has-text(\"Manual order\")"
+          },
+          {
+            "wait": 600
+          }
+        ]
+      },
+      "body": "Each row shows per-product metrics — sales, CTR, and inventory — right beside the product. Use them as a guide while you curate, so your hand-set order still respects what's actually performing.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 110,
+          "y": 130,
+          "w": 320,
+          "kicker": "Informed",
+          "step": true,
+          "text": "Per-product metrics sit beside each row so your manual order still reflects real performance."
+        },
+        {
+          "type": "magnifier",
+          "at": ".Polaris-Badge",
+          "mag": 2.4,
+          "shape": "circle"
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "Switch the sort rule to Manual pinning if you want this hand-set order to stick instead of being re-sorted automatically."
+        }
+      ]
+    }
+  ],
+  "outro": "Manual order gives you full control: arrange products exactly as you want them, with per-product metrics on hand to keep your curation grounded in real data."
+}

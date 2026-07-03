@@ -1,0 +1,147 @@
+{
+  "title": "Track collection activity",
+  "slug": "qsortby-collection-activity",
+  "publish": {
+    "app": "qsortby",
+    "section": "3-collections",
+    "order": 60,
+    "file": "collection-activity",
+    "description": "Read the Activity tab — CTR before and now, the uplift it produced, and the run history log."
+  },
+  "bg": "light",
+  "baseUrl": "http://localhost:55166",
+  "viewport": {
+    "width": 1200,
+    "height": 720
+  },
+  "intro": "Once a collection is sorting, the Activity tab tells you whether it's working. It compares click-through before and after qSortBy took over, shows the uplift, and keeps a log of every sort run.",
+  "steps": [
+    {
+      "n": 1,
+      "heading": "Open the Activity tab",
+      "capture": {
+        "path": "/preview/collections/c-1001",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "click": ".Polaris-Tabs__Tab:visible:has-text(\"Activity\")"
+          },
+          {
+            "wait": 600
+          }
+        ]
+      },
+      "body": "Get there from **Left menu → Collections → open a collection → the Activity tab**. This is the collection's report card — proof of what the sorting has done, in one view.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 470,
+          "y": 150,
+          "w": 330,
+          "kicker": "Find it",
+          "step": true,
+          "text": "Left menu → <b>Collections</b> → open a collection → the <b>Activity</b> tab — its report card for how sorting is performing."
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Navigation__Item:has-text(\"Collections\")",
+          "pad": 4
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Collections\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "highlight",
+          "at": ".Polaris-Tabs__Tab:has-text(\"Activity\")",
+          "pad": 3
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "heading": "Compare CTR and read the uplift",
+      "capture": {
+        "path": "/preview/collections/c-1001",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "click": ".Polaris-Tabs__Tab:visible:has-text(\"Activity\")"
+          },
+          {
+            "wait": 600
+          }
+        ]
+      },
+      "body": "The top of the tab shows **CTR before** qSortBy sorted the collection next to **CTR now**, with the **uplift** between them. A positive uplift means the sort rule is putting the products shoppers click on higher up.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 110,
+          "y": 130,
+          "w": 320,
+          "kicker": "Impact",
+          "step": true,
+          "text": "<b>CTR before</b> vs <b>now</b>, with the <b>uplift</b> — positive means sorting is helping."
+        }
+      ],
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "Give a new sort rule a few days of traffic before judging the uplift — early numbers move around."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "heading": "Review the run history",
+      "capture": {
+        "path": "/preview/collections/c-1001",
+        "wait": "networkidle",
+        "actions": [
+          {
+            "click": ".Polaris-Tabs__Tab:visible:has-text(\"Activity\")"
+          },
+          {
+            "wait": 600
+          }
+        ]
+      },
+      "body": "Below the metrics, the **run history** table logs every sort — when it ran, what triggered it, and how the order changed. Use it to confirm the collection is re-sorting on the cadence you set and to trace any surprising change back to a specific run.",
+      "els": [
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 110,
+          "y": 130,
+          "w": 320,
+          "kicker": "History",
+          "step": true,
+          "text": "The <b>run history</b> logs every sort — when it ran and how the order changed."
+        },
+        {
+          "type": "magnifier",
+          "at": ".Polaris-Badge:has-text(\"Success\")",
+          "mag": 2.4,
+          "shape": "circle"
+        }
+      ]
+    }
+  ],
+  "outro": "The Activity tab closes the loop: it shows the CTR before and after, the uplift qSortBy produced, and a full run history so you can trust that sorting is doing its job."
+}
