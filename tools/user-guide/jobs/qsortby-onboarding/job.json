@@ -4,9 +4,10 @@
   "publish": {
     "app": "qsortby",
     "section": "1-getting-started",
-    "order": 40,
+    "order": 25,
     "file": "onboarding",
-    "description": "Walk through qSortBy's guided setup wizard — track your progress, pick a sort signal, and tick off the launch checklist."
+    "description": "Walk through qSortBy's guided setup wizard — track your progress, pick a sort signal, and tick off the launch checklist.",
+    "sectionLabel": "Getting started"
   },
   "bg": "light",
   "baseUrl": "http://localhost:55166",

@@ -160,6 +160,9 @@ const frontmatter = [
   '---',
   `title: "${esc(title)}"`,
   description ? `description: "${esc(description)}"` : null,
+  // optional exact group label + order (else the site derives them from the folder name/number)
+  pub.sectionLabel ? `section: "${esc(pub.sectionLabel)}"` : null,
+  pub.sectionOrder != null ? `sectionOrder: ${pub.sectionOrder}` : null,
   `updated: ${updated}`,
   draft ? 'draft: true' : null,
   '---',

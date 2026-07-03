@@ -6,34 +6,98 @@
     "section": "1-getting-started",
     "order": 30,
     "file": "quickstart",
-    "description": "Take a tour of qSortBy, then create and sort your first collection end to end."
+    "description": "Take a tour of qSortBy, then create and sort your first collection end to end.",
+    "sectionLabel": "Getting started"
   },
   "bg": "light",
   "baseUrl": "http://localhost:55166",
-  "viewport": { "width": 1200, "height": 1000 },
+  "viewport": {
+    "width": 1200,
+    "height": 1000
+  },
   "intro": "qSortBy automatically reorders your Shopify collections by what's actually selling — best sellers, CTR, revenue or trending — and keeps them fresh as new orders come in. This quick start gives you a tour of the app, then walks you through creating and sorting your first collection.",
   "steps": [
     {
       "n": 1,
       "heading": "Get your bearings",
-      "capture": { "path": "/preview", "wait": "networkidle" },
+      "capture": {
+        "path": "/preview",
+        "wait": "networkidle"
+      },
       "body": "The **Dashboard** is your home base. The tiles up top track how qSortBy is performing — collections under management, average CTR, auto-sorts run, and revenue influenced. Use the left navigation to move between **Collections**, **Analytics**, **Insights**, and **Settings**.",
       "els": [
-        { "type": "callout", "id": "c1", "x": 700, "y": 250, "w": 300, "kicker": "What it does", "step": true, "text": "<b>qSortBy</b> ranks every collection by real sales signals — and re-sorts as new orders arrive." },
-        { "type": "anchor", "id": "a1", "at": ".Polaris-Navigation__Item:has-text(\"Collections\")" },
-        { "type": "connector", "from": { "ref": "c1" }, "to": { "ref": "a1" }, "caps": "end", "route": "elbow", "thickness": 5 }
+        {
+          "type": "callout",
+          "id": "c1",
+          "x": 700,
+          "y": 250,
+          "w": 300,
+          "kicker": "What it does",
+          "step": true,
+          "text": "<b>qSortBy</b> ranks every collection by real sales signals — and re-sorts as new orders arrive."
+        },
+        {
+          "type": "anchor",
+          "id": "a1",
+          "at": ".Polaris-Navigation__Item:has-text(\"Collections\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c1"
+          },
+          "to": {
+            "ref": "a1"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
       ],
-      "notes": [{ "kind": "Tip", "text": "These are mocked preview numbers — your store's real metrics appear once the app is installed." }]
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "These are mocked preview numbers — your store's real metrics appear once the app is installed."
+        }
+      ]
     },
     {
       "n": 2,
       "heading": "Browse your collections",
-      "capture": { "path": "/preview/collections", "wait": "networkidle", "selector": ".Polaris-Page" },
+      "capture": {
+        "path": "/preview/collections",
+        "wait": "networkidle",
+        "selector": ".Polaris-Page"
+      },
       "body": "Open **Collections** to see everything qSortBy manages. Each row shows its live **Sort Rule**, schedule, and 30-day CTR at a glance. To make a new one, select **Create collection** in the top-right.",
       "els": [
-        { "type": "callout", "id": "c2", "x": 560, "y": 150, "w": 300, "kicker": "Step 1", "step": true, "text": "Every row shows the live <b>Sort Rule</b> and CTR. Select <b>Create collection</b> to add one." },
-        { "type": "anchor", "id": "a2", "at": "button:has-text(\"Create collection\")" },
-        { "type": "connector", "from": { "ref": "c2" }, "to": { "ref": "a2" }, "caps": "end", "route": "elbow", "thickness": 5 }
+        {
+          "type": "callout",
+          "id": "c2",
+          "x": 560,
+          "y": 150,
+          "w": 300,
+          "kicker": "Step 1",
+          "step": true,
+          "text": "Every row shows the live <b>Sort Rule</b> and CTR. Select <b>Create collection</b> to add one."
+        },
+        {
+          "type": "anchor",
+          "id": "a2",
+          "at": "button:has-text(\"Create collection\")"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c2"
+          },
+          "to": {
+            "ref": "a2"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
       ]
     },
     {
@@ -44,16 +108,51 @@
         "wait": "networkidle",
         "selector": ".Polaris-Page",
         "actions": [
-          { "fill": { "selector": "input[placeholder=\"e.g. Summer Essentials\"]", "value": "Summer Essentials" } },
-          { "wait": 300 }
+          {
+            "fill": {
+              "selector": "input[placeholder=\"e.g. Summer Essentials\"]",
+              "value": "Summer Essentials"
+            }
+          },
+          {
+            "wait": 300
+          }
         ]
       },
       "body": "Give the collection a name, then choose how products join it — **manually**, where you pick each product, or **automatically** by conditions like tag, type or price. qSortBy creates a real Shopify collection in your store.",
       "els": [
-        { "type": "callout", "id": "c3", "x": 640, "y": 150, "w": 300, "kicker": "Step 2", "step": true, "text": "Name it, then pick how products are added — <b>manual</b> or <b>automatic</b>." },
-        { "type": "anchor", "id": "a3", "at": "input[placeholder=\"e.g. Summer Essentials\"]" },
-        { "type": "connector", "from": { "ref": "c3" }, "to": { "ref": "a3" }, "caps": "end", "route": "elbow", "thickness": 5 },
-        { "type": "highlight", "at": "text=How are products added?", "pad": 10 }
+        {
+          "type": "callout",
+          "id": "c3",
+          "x": 640,
+          "y": 150,
+          "w": 300,
+          "kicker": "Step 2",
+          "step": true,
+          "text": "Name it, then pick how products are added — <b>manual</b> or <b>automatic</b>."
+        },
+        {
+          "type": "anchor",
+          "id": "a3",
+          "at": "input[placeholder=\"e.g. Summer Essentials\"]"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c3"
+          },
+          "to": {
+            "ref": "a3"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "highlight",
+          "at": "text=How are products added?",
+          "pad": 10
+        }
       ]
     },
     {
@@ -64,19 +163,63 @@
         "wait": "networkidle",
         "selector": ".Polaris-Page",
         "actions": [
-          { "fill": { "selector": "input[placeholder=\"e.g. Summer Essentials\"]", "value": "Summer Essentials" } },
-          { "wait": 300 }
+          {
+            "fill": {
+              "selector": "input[placeholder=\"e.g. Summer Essentials\"]",
+              "value": "Summer Essentials"
+            }
+          },
+          {
+            "wait": 300
+          }
         ]
       },
       "body": "Now build the sort rule: **(1)** pick a signal under *Sort products by* — **Best sellers** ranks by units sold — **(2)** choose the **sales window** it measures, and **(3)** turn on **Update automatically** to re-sort on a schedule. The **In plain words** panel restates your choices in a sentence. When you're happy, select **Create collection**.",
       "els": [
-        { "type": "callout", "id": "c4", "x": 600, "y": 240, "w": 300, "kicker": "Step 3", "step": true, "text": "Pick a sort signal. <b>Best sellers</b> ranks products by units sold." },
-        { "type": "anchor", "id": "a4", "at": "select:has(option[value=\"BEST_SELLERS\"])" },
-        { "type": "connector", "from": { "ref": "c4" }, "to": { "ref": "a4" }, "caps": "end", "route": "elbow", "thickness": 5 },
-        { "type": "highlight", "at": "select:has(option[value=\"BEST_SELLERS\"])", "pad": 6 },
-        { "type": "highlight", "at": "text=In plain words", "pad": 12 }
+        {
+          "type": "callout",
+          "id": "c4",
+          "x": 600,
+          "y": 240,
+          "w": 300,
+          "kicker": "Step 3",
+          "step": true,
+          "text": "Pick a sort signal. <b>Best sellers</b> ranks products by units sold."
+        },
+        {
+          "type": "anchor",
+          "id": "a4",
+          "at": "select:has(option[value=\"BEST_SELLERS\"])"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c4"
+          },
+          "to": {
+            "ref": "a4"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        },
+        {
+          "type": "highlight",
+          "at": "select:has(option[value=\"BEST_SELLERS\"])",
+          "pad": 6
+        },
+        {
+          "type": "highlight",
+          "at": "text=In plain words",
+          "pad": 12
+        }
       ],
-      "notes": [{ "kind": "Tip", "text": "Set updates to \"As sales come in\" for live re-ranking, or Daily/Hourly for a steadier cadence." }]
+      "notes": [
+        {
+          "kind": "Tip",
+          "text": "Set updates to \"As sales come in\" for live re-ranking, or Daily/Hourly for a steadier cadence."
+        }
+      ]
     },
     {
       "n": 5,
@@ -85,15 +228,43 @@
         "path": "/preview/collections/c-1001",
         "wait": "networkidle",
         "actions": [
-          { "click": ".Polaris-Tabs__Tab:visible:has-text(\"Preview & test\")" },
-          { "wait": 600 }
+          {
+            "click": ".Polaris-Tabs__Tab:visible:has-text(\"Preview & test\")"
+          },
+          {
+            "wait": 600
+          }
         ]
       },
       "body": "On any collection, the **Preview & test** tab does a dry run — it shows your **current** order beside the **proposed** order, with ▲/▼ badges for how far each product moves. Nothing publishes to your storefront until you apply the sort, so you can check the result risk-free.",
       "els": [
-        { "type": "callout", "id": "c5", "x": 110, "y": 120, "w": 300, "kicker": "Result", "step": true, "text": "Top sellers float up. The badges show how many spots each product moves." },
-        { "type": "anchor", "id": "a5", "at": "text=Proposed order" },
-        { "type": "connector", "from": { "ref": "c5" }, "to": { "ref": "a5" }, "caps": "end", "route": "elbow", "thickness": 5 }
+        {
+          "type": "callout",
+          "id": "c5",
+          "x": 110,
+          "y": 120,
+          "w": 300,
+          "kicker": "Result",
+          "step": true,
+          "text": "Top sellers float up. The badges show how many spots each product moves."
+        },
+        {
+          "type": "anchor",
+          "id": "a5",
+          "at": "text=Proposed order"
+        },
+        {
+          "type": "connector",
+          "from": {
+            "ref": "c5"
+          },
+          "to": {
+            "ref": "a5"
+          },
+          "caps": "end",
+          "route": "elbow",
+          "thickness": 5
+        }
       ]
     }
   ],

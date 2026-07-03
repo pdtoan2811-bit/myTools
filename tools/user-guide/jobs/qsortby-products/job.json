@@ -3,10 +3,11 @@
   "slug": "qsortby-products",
   "publish": {
     "app": "qsortby",
-    "section": "3-collections",
-    "order": 70,
+    "section": "5-products",
+    "order": 10,
     "file": "products-catalog",
-    "description": "Tour the Products page — stat tiles, saved views, the Rank by control, filters, and every performance column."
+    "description": "Tour the Products page — stat tiles, saved views, the Rank by control, filters, and every performance column.",
+    "sectionLabel": "Products"
   },
   "bg": "light",
   "baseUrl": "http://localhost:55166",

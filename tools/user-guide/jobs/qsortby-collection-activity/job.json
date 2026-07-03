@@ -3,10 +3,11 @@
   "slug": "qsortby-collection-activity",
   "publish": {
     "app": "qsortby",
-    "section": "3-collections",
+    "section": "2-collections",
     "order": 60,
     "file": "collection-activity",
-    "description": "Read the Activity tab — CTR before and now, the uplift it produced, and the run history log."
+    "description": "Read the Activity tab — CTR before and now, the uplift it produced, and the run history log.",
+    "sectionLabel": "Collections & sorting"
   },
   "bg": "light",
   "baseUrl": "http://localhost:55166",

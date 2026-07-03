@@ -3,10 +3,11 @@
   "slug": "qsortby-insights",
   "publish": {
     "app": "qsortby",
-    "section": "5-analytics",
+    "section": "3-analytics",
     "order": 30,
     "file": "customer-insights",
-    "description": "Tour qSortBy's three Insights tabs — Customer Emotions with an AI summary, the Customer Heatmap, and the Customer Journey funnel."
+    "description": "Tour qSortBy's three Insights tabs — Customer Emotions with an AI summary, the Customer Heatmap, and the Customer Journey funnel.",
+    "sectionLabel": "Analytics & insights"
   },
   "bg": "light",
   "baseUrl": "http://localhost:55166",

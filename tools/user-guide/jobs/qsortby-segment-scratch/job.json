@@ -6,7 +6,8 @@
     "section": "4-personalization",
     "order": 30,
     "file": "build-from-scratch",
-    "description": "Build a rule by hand: name it, add a shopper group, set audience conditions and ranking signals, and understand the Everyone else fallback."
+    "description": "Build a rule by hand: name it, add a shopper group, set audience conditions and ranking signals, and understand the Everyone else fallback.",
+    "sectionLabel": "Personalization"
   },
   "bg": "light",
   "baseUrl": "http://localhost:55166",

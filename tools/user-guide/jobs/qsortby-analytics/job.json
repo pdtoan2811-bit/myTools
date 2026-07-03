@@ -3,10 +3,11 @@
   "slug": "qsortby-analytics",
   "publish": {
     "app": "qsortby",
-    "section": "5-analytics",
+    "section": "3-analytics",
     "order": 10,
     "file": "analytics-dashboard",
-    "description": "Read the Analytics Overview — headline metric cards, the date range, and the per-collection performance table with CTR trend and uplift."
+    "description": "Read the Analytics Overview — headline metric cards, the date range, and the per-collection performance table with CTR trend and uplift.",
+    "sectionLabel": "Analytics & insights"
   },
   "bg": "light",
   "baseUrl": "http://localhost:55166",

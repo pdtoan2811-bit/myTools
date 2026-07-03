@@ -6,7 +6,8 @@
     "section": "4-personalization",
     "order": 20,
     "file": "ai-and-presets",
-    "description": "Two quick ways to create a segment rule: describe your shoppers in plain English for AI to build, or start from a ready-made preset."
+    "description": "Two quick ways to create a segment rule: describe your shoppers in plain English for AI to build, or start from a ready-made preset.",
+    "sectionLabel": "Personalization"
   },
   "bg": "light",
   "baseUrl": "http://localhost:55166",

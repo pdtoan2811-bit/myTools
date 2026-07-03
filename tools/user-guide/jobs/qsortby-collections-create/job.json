@@ -3,10 +3,11 @@
   "slug": "qsortby-collections-create",
   "publish": {
     "app": "qsortby",
-    "section": "3-collections",
-    "order": 20,
+    "section": "2-collections",
+    "order": 10,
     "file": "create-collection",
-    "description": "Name a new collection, choose how products join it, and pick the sort rule that keeps it ordered."
+    "description": "Name a new collection, choose how products join it, and pick the sort rule that keeps it ordered.",
+    "sectionLabel": "Collections & sorting"
   },
   "bg": "light",
   "baseUrl": "http://localhost:55166",

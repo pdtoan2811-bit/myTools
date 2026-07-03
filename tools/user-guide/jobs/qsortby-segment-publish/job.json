@@ -6,7 +6,8 @@
     "section": "4-personalization",
     "order": 40,
     "file": "publish-and-manage",
-    "description": "Review an existing rule, read its live reach preview and In plain words summary, then publish it — only one rule is live at a time."
+    "description": "Review an existing rule, read its live reach preview and In plain words summary, then publish it — only one rule is live at a time.",
+    "sectionLabel": "Personalization"
   },
   "bg": "light",
   "baseUrl": "http://localhost:55166",

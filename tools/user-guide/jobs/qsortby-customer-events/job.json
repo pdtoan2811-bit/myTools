@@ -3,10 +3,11 @@
   "slug": "qsortby-customer-events",
   "publish": {
     "app": "qsortby",
-    "section": "5-analytics",
+    "section": "3-analytics",
     "order": 20,
     "file": "customer-events",
-    "description": "Explore Analytics' Customer events tab — the visitor table with kind, device and last-seen — and the live Shopify Event log stream."
+    "description": "Explore Analytics' Customer events tab — the visitor table with kind, device and last-seen — and the live Shopify Event log stream.",
+    "sectionLabel": "Analytics & insights"
   },
   "bg": "light",
   "baseUrl": "http://localhost:55166",

@@ -3,10 +3,11 @@
   "slug": "qsortby-sort-signals",
   "publish": {
     "app": "qsortby",
-    "section": "3-collections",
-    "order": 30,
+    "section": "2-collections",
+    "order": 20,
     "file": "sort-signals",
-    "description": "Understand the seven sort signals, the sales window, and the update cadence on a collection's Setup tab."
+    "description": "Understand the seven sort signals, the sales window, and the update cadence on a collection's Setup tab.",
+    "sectionLabel": "Collections & sorting"
   },
   "bg": "light",
   "baseUrl": "http://localhost:55166",

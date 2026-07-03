@@ -3,10 +3,11 @@
   "slug": "qsortby-collections-manage",
   "publish": {
     "app": "qsortby",
-    "section": "3-collections",
-    "order": 10,
+    "section": "2-collections",
+    "order": 40,
     "file": "manage-collections",
-    "description": "Read the collections list — source tabs, status badges, stat tiles, and the row actions that run or pause a sort."
+    "description": "Read the collections list — source tabs, status badges, stat tiles, and the row actions that run or pause a sort.",
+    "sectionLabel": "Collections & sorting"
   },
   "bg": "light",
   "baseUrl": "http://localhost:55166",

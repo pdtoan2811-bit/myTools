@@ -6,7 +6,8 @@
     "section": "4-personalization",
     "order": 10,
     "file": "overview",
-    "description": "What segment rules do, how the rule list and Published/Draft status work, and where to create your first rule."
+    "description": "What segment rules do, how the rule list and Published/Draft status work, and where to create your first rule.",
+    "sectionLabel": "Personalization"
   },
   "bg": "light",
   "baseUrl": "http://localhost:55166",

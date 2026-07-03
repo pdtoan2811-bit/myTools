@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dashboard-preview",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["/Users/thomas/qdn/apps/qsortby/app/scripts/dev-preview.sh"],
+      "port": 3000,
+      "autoPort": false
+    }
+  ]
+}

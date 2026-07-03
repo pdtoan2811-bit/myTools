@@ -4,9 +4,10 @@
   "publish": {
     "app": "qsortby",
     "section": "6-settings",
-    "order": 40,
+    "order": 30,
     "file": "integrations",
-    "description": "Link qSortBy to third-party tools — manage your connected Klaviyo account and connect Google Analytics 4."
+    "description": "Link qSortBy to third-party tools — manage your connected Klaviyo account and connect Google Analytics 4.",
+    "sectionLabel": "Account & settings"
   },
   "bg": "light",
   "baseUrl": "http://localhost:55166",

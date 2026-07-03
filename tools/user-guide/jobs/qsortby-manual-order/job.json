@@ -3,10 +3,11 @@
   "slug": "qsortby-manual-order",
   "publish": {
     "app": "qsortby",
-    "section": "3-collections",
+    "section": "2-collections",
     "order": 50,
     "file": "manual-order",
-    "description": "Use the Manual order tab to hand-curate product order, guided by per-product metrics."
+    "description": "Use the Manual order tab to hand-curate product order, guided by per-product metrics.",
+    "sectionLabel": "Collections & sorting"
   },
   "bg": "light",
   "baseUrl": "http://localhost:55166",
