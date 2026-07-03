@@ -16,7 +16,7 @@ function startLiveReload() {
       if (rev && lastRev && rev !== lastRev) { bust = rev; renderPreview(); loadJobs(); toast('Preview updated'); }
       lastRev = rev || lastRev;
     } catch {}
-  }, 1200);
+  }, 600);
 }
 
 // ---- tiny markdown renderer (covers what /guide produces) ----
@@ -89,7 +89,7 @@ $('#rerender').addEventListener('click', async () => {
   toast('Re-rendering from edited images…'); $('#rerender').disabled = true;
   const r = await fetch(`/api/jobs/${current}/render`, { method: 'POST' }).then((x) => x.json());
   $('#rerender').disabled = false;
-  if (r.ok) { await openJob(current); toast('Re-rendered — preview updated'); } else toast('Render failed (see console)'), console.log(r.log);
+  if (r.ok) { bust = Date.now(); await openJob(current); toast('Re-rendered — preview updated'); } else toast('Render failed (see console)'), console.log(r.log);
 });
 
 loadJobs();

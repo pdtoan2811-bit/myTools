@@ -48,22 +48,47 @@
     try { const old = JSON.parse(localStorage.getItem('ugs_guide')); if (old && old.slides) { old.id = old.id || uid('p_'); return { activeId: old.id, projects: { [old.id]: old } }; } } catch (e) {}
     return null;
   }
+  let jobSlug = null, saveTimer = null, renderTimer = null;   // jobSlug is set by the Guide Studio bridge
   function saveStore() { try { localStorage.setItem('ugs_store', JSON.stringify(store)); } catch (e) {} }
-  function save() { guide.updatedAt = Date.now(); store.projects[guide.id] = guide; store.activeId = guide.id; saveStore(); }
+  // ---- persistent undo history (survives reload → instantly continueable) ----
+  const HIST_KEY = (id) => 'ugs_hist_' + id;
+  function persistHist() { try { localStorage.setItem(HIST_KEY(guide.id), JSON.stringify({ h: history.slice(-60), i: hidx })); } catch (e) {} }
+  function restoreHist(id) { try { const s = JSON.parse(localStorage.getItem(HIST_KEY(id))); if (s && Array.isArray(s.h) && s.h.length) { history = s.h; hidx = Math.min(s.i, s.h.length - 1); return true; } } catch (e) {} return false; }
+  // ---- auto-save to the job's guide.json (debounced), then auto-render so the Studio preview refreshes ----
+  let rendering = false, pendingRender = false;
+  function triggerRender() {
+    if (!jobSlug) return;
+    if (rendering) { pendingRender = true; return; }        // never overlap renders — they'd race on the assets
+    rendering = true;
+    fetch(`/api/jobs/${jobSlug}/render`, { method: 'POST' }).catch(() => {}).finally(() => {
+      rendering = false;
+      if (pendingRender) { pendingRender = false; triggerRender(); }   // one more pass for edits made mid-render
+    });
+  }
+  function autosaveServer() {
+    if (!jobSlug) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      fetch(`/api/jobs/${jobSlug}/guide`, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(guide, null, 2) })
+        .then(() => { clearTimeout(renderTimer); renderTimer = setTimeout(triggerRender, 450); })
+        .catch(() => {});
+    }, 400);
+  }
+  function save() { guide.updatedAt = Date.now(); store.projects[guide.id] = guide; store.activeId = guide.id; saveStore(); autosaveServer(); }
   function snapshot() {
     history = history.slice(0, hidx + 1);
     history.push(JSON.stringify(guide));
     if (history.length > 60) history.shift();
     hidx = history.length - 1;
-    save();
+    save(); persistHist();
   }
   function undo() {
     if (hidx <= 0) return;
-    hidx--; guide = JSON.parse(history[hidx]); store.projects[guide.id] = guide; selId = null; renderAll(); save();
+    hidx--; guide = JSON.parse(history[hidx]); store.projects[guide.id] = guide; selId = null; renderAll(); save(); persistHist();
   }
   function redo() {
     if (hidx >= history.length - 1) return;
-    hidx++; guide = JSON.parse(history[hidx]); store.projects[guide.id] = guide; selId = null; renderAll(); save();
+    hidx++; guide = JSON.parse(history[hidx]); store.projects[guide.id] = guide; selId = null; renderAll(); save(); persistHist();
   }
 
   // ---- global step numbering (continuous across slides) -----------
@@ -648,12 +673,15 @@
     save();
     store.activeId = id; guide = store.projects[id];
     if (!guide.activeId) guide.activeId = guide.slides[0].id;
-    selId = null; cropId = null; history = []; hidx = -1; captureTarget = 'new';
+    selId = null; cropId = null; captureTarget = 'new';
+    const hadHist = restoreHist(id);        // resume the undo/redo history if we have it
+    if (!hadHist) { history = []; hidx = -1; }
     $('#guideTitle').value = guide.title;
     $('#bgLight').classList.toggle('on', guide.bg !== 'dark');
     $('#bgDark').classList.toggle('on', guide.bg === 'dark');
     showEditor();
-    snapshot(); renderAll(); fit();
+    if (!hadHist) snapshot();               // seed history only when there's none to resume
+    renderAll(); fit();
   }
   function showDashboard() { save(); renderDashboard(); document.body.classList.add('dash-open'); }
   function showEditor() { document.body.classList.remove('dash-open'); }
@@ -1001,17 +1029,17 @@
   // ---- Guide Studio bridge: load/save a job's guide.json via ?job=<slug> ----
   (function jobBridge() {
     const slug = new URLSearchParams(location.search).get('job'); if (!slug) return;
+    jobSlug = slug;   // enables auto-save + auto-render on every edit
     fetch(`/api/jobs/${slug}`).then((r) => r.json()).then((d) => {
       if (!d || !d.guide) { toast('No guide.json yet — run the job first'); return; }
-      d.guide.title = d.guide.title || slug;
-      window.__ugs.loadGuide(d.guide);
-      const bar = document.querySelector('.topbar'); if (!bar) return;
-      const btn = document.createElement('button');
-      btn.className = 'btn green'; btn.textContent = '✓ Save to job'; btn.style.marginLeft = '6px';
-      btn.onclick = () => fetch(`/api/jobs/${slug}/guide`, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(window.__ugs.getGuide(), null, 2) })
-        .then(() => toast('Saved to job — hit Re-render in Guide Studio'));
-      bar.appendChild(btn);
-      toast(`Editing job “${slug}” — Save to job when done`);
+      const id = 'job_' + slug;
+      d.guide.id = id; d.guide.title = d.guide.title || slug;
+      // resume your in-progress edits if the locally-saved copy is newer than the job's guide.json
+      const local = store.projects[id];
+      const resume = local && (local.updatedAt || 0) > (d.guide.updatedAt || 0);
+      store.projects[id] = resume ? local : d.guide; saveStore();
+      openProject(id);
+      toast(resume ? `Resumed your edits for “${slug}” — auto-saving` : `Editing “${slug}” — edits auto-save & re-render`);
     }).catch(() => {});
   })();
 })();
