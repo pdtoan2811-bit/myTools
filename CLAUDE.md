@@ -5,6 +5,12 @@ the top. The machine-readable source of truth is [`workspace.json`](workspace.js
 file is the human/AI-readable projection of it. **If they disagree, `workspace.json` wins —
 update both.**
 
+> 📦 **This workspace root IS the `myTools` repo** (`pdtoan2811-bit/myTools`, branch `main`).
+> It tracks the canonical `tools/` and workspace glue only. App **content**
+> (`apps/*/{app,website,guides}`) is git-ignored here — each lives in its own repo on its own
+> `toan*` branch. Per-app tool copies (`apps/*/tools`) are ignored too (regenerate with
+> `sync-tools.mjs`). See [`.gitignore`](.gitignore).
+
 > ⚠️ Folder names here (and in the old `~/` layout) have historically misled — e.g. the old
 > `~/QSortby-website` was actually the *app*, not the site. Trust the `CLAUDE.md` identity
 > header inside each repo, not the folder name.
@@ -34,9 +40,23 @@ update both.**
 | --- | --- | --- | --- |
 | **qsortby** (aka qsense/QSortby) | app | `apps/qsortby/app` | `qdndigital/qsense` · `toanQsenseApp` |
 | | website | `apps/qsortby/website` | `qdndigital/qsortby-web` · `toanWebsite` |
-| | guides | `apps/qsortby/guides` | `qdndigital/qsortby-guide` · `guide/quickstart` |
+| | guides | `apps/qsortby/guides` | `qdndigital/qsortby-guide` · `toanGuide` |
 
 _Personal app fork: `~/qdnQsense` (`pdtoan2811-bit/qsortby`) — not under `~/qdn`._
+
+## Slash commands (routing)
+
+Run from the workspace root. Each takes an optional `[app]` (defaults to `qsortby`) and drops
+you into the right repo/tool with its skill + scope guardrail loaded. Defined in
+[`.claude/commands/`](.claude/commands).
+
+| Command | Opens | Path | Branch |
+| --- | --- | --- | --- |
+| `/app [app]`        | product app (Remix monorepo)      | `apps/<app>/app`               | `toanQsenseApp` |
+| `/website [app]`    | marketing website (Astro)         | `apps/<app>/website`           | `toanWebsite` |
+| `/guide [app]`      | user-guide tool (userGuideSnap)   | `apps/<app>/tools/user-guide`  | publishes → `apps/<app>/guides` (`toanGuide`) |
+| `/applisting [app]` | app-listing tool (Listing Studio) | `apps/<app>/tools/app-listing` | — |
+| `/qdn`              | prints this routing map           | —                              | — |
 
 ## Tool model (canonical → per-app copies)
 

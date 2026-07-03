@@ -29,7 +29,7 @@
       "parts": {
         "app":     { "path": "apps/qsortby/app",     "repo": "qdndigital/qsense",       "branch": "toanQsenseApp",    "role": "Remix/turbo monorepo — the ACTUAL app (dashboard/admin/api/intelligence)" },
         "website": { "path": "apps/qsortby/website", "repo": "qdndigital/qsortby-web",   "branch": "toanWebsite",      "role": "Astro marketing website" },
-        "guides":  { "path": "apps/qsortby/guides",  "repo": "qdndigital/qsortby-guide", "branch": "guide/quickstart", "role": "Astro docs/guide hub (publish target of the user-guide tool)" }
+        "guides":  { "path": "apps/qsortby/guides",  "repo": "qdndigital/qsortby-guide", "branch": "toanGuide", "role": "Astro docs/guide hub (publish target of the user-guide tool)" }
       },
       "tools": {
         "app-listing": "apps/qsortby/tools/app-listing",
