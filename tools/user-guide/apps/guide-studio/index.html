@@ -20,6 +20,11 @@
   .job:hover{border-color:var(--line-2)} .job.on{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,163,107,.14)}
   .job .t{font-weight:600;font-size:13.5px;letter-spacing:-.01em}
   .job .m{display:flex;align-items:center;gap:8px;margin-top:6px;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+  .job.is-ready{border-color:var(--green);background:linear-gradient(180deg,var(--green-soft),#fff)}
+  .ready-btn{margin-top:9px;width:100%;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    padding:6px 8px;border-radius:8px;border:1px solid var(--line-2);background:#fff;color:var(--muted);cursor:pointer;transition:all .13s var(--ease)}
+  .ready-btn:hover{border-color:var(--green-line);color:var(--green-ink);background:var(--green-soft)}
+  .ready-btn.on{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 4px 12px -4px rgba(0,163,107,.5)}
   .state{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:999px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
   .state.ready{color:var(--green-ink);background:var(--green-soft)} .state.draft{color:var(--muted);background:var(--paper)}
   .state.error{color:var(--down);background:#fbeceb} .state.capturing,.state.rendering,.state.assembling{color:#9a6b00;background:#fdf6e3}

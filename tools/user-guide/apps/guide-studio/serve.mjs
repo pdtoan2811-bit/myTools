@@ -32,8 +32,8 @@ async function listJobs() {
     const job = await readJson(join(dir, 'job.json'));
     const st = await readJson(join(dir, 'status.json'), { state: job ? 'draft' : 'new' });
     let images = 0; try { images = (await readdir(join(dir, 'assets'))).filter((f) => f.endsWith('.png')).length; } catch {}
-    // Archived state lives in a marker file (NOT status.json, which the worker rewrites every run).
-    out.push({ slug, title: job?.title || slug, state: st?.state || 'new', steps: job?.steps?.length || 0, images, hasMd: existsSync(join(dir, 'guide.md')), archived: existsSync(join(dir, '.archived')) });
+    // Archived / ready-to-go state live in marker files (NOT status.json, which the worker rewrites every run).
+    out.push({ slug, title: job?.title || slug, state: st?.state || 'new', steps: job?.steps?.length || 0, images, hasMd: existsSync(join(dir, 'guide.md')), archived: existsSync(join(dir, '.archived')), ready: existsSync(join(dir, '.ready')) });
   }
   return out;
 }
@@ -76,6 +76,12 @@ createServer(async (req, res) => {
         if (want.archived === false) { if (existsSync(marker)) await unlink(marker); }
         else await writeFile(marker, new Date().toISOString());
         return json(res, 200, { ok: true, archived: want.archived !== false });
+      }
+      if (req.method === 'POST' && sub === '/ready') {                                                  // mark "ready to go" (marker file for later commit/publish)
+        const want = JSON.parse((await body(req)) || '{}'); const marker = join(dir, '.ready');
+        const on = want.ready !== false;
+        if (on) await writeFile(marker, new Date().toISOString()); else if (existsSync(marker)) await unlink(marker);
+        return json(res, 200, { ok: true, ready: on });
       }
       if (req.method === 'DELETE' && sub === '') {                                                      // remove → move to jobs/.trash (recoverable)
         const trash = join(JOBS, '.trash'); if (!existsSync(trash)) await mkdir(trash, { recursive: true });

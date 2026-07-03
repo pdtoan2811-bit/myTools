@@ -35,3 +35,5 @@ exports/
 .env.*
 !*.example
 .DS_Store
+**/jobs/*/.ready
+**/jobs/*/.archived

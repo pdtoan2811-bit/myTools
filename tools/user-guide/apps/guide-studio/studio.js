@@ -51,11 +51,19 @@ async function loadJobs() {
   const jobs = await fetch('/api/jobs').then((r) => r.json());
   $('#count').textContent = jobs.length;
   $('#jobs').innerHTML = jobs.map((j) => `
-    <div class="job ${j.slug === current ? 'on' : ''}" data-slug="${j.slug}">
+    <div class="job ${j.slug === current ? 'on' : ''} ${j.ready ? 'is-ready' : ''}" data-slug="${j.slug}">
       <div class="t">${j.title}</div>
       <div class="m"><span class="state ${stateClass(j.state)}">${j.state}</span> · ${j.steps} steps · ${j.images} imgs</div>
+      <button class="ready-btn ${j.ready ? 'on' : ''}" data-ready="${j.slug}" title="Mark this guide ready to go">${j.ready ? '✓ Ready to go' : 'Mark ready'}</button>
     </div>`).join('') || '<p style="font-size:12.5px;color:var(--muted);padding:6px">No guides yet. Run <b>/guide</b> in Claude Code.</p>';
   document.querySelectorAll('.job').forEach((el) => el.addEventListener('click', () => openJob(el.dataset.slug)));
+  document.querySelectorAll('.ready-btn').forEach((el) => el.addEventListener('click', async (e) => {
+    e.stopPropagation();                                   // don't open the guide — just toggle
+    const slug = el.dataset.ready, on = !el.classList.contains('on');
+    await fetch(`/api/jobs/${slug}/ready`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ready: on }) });
+    toast(on ? 'Marked ready to go' : 'Unmarked');
+    loadJobs();
+  }));
 }
 
 async function openJob(slug) {
