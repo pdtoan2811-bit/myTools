@@ -2,14 +2,29 @@
 const $ = (s) => document.querySelector(s);
 let current = null;
 let toastT;
+let bust = Date.now();             // cache-buster appended to rendered image URLs
+let lastRev = 0, revTimer = null;  // live-reload poll state
 const toast = (m) => { const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2600); };
+
+// ---- live reload: poll the open job's asset mtime; refresh the preview on change ----
+function startLiveReload() {
+  clearInterval(revTimer); lastRev = 0;
+  revTimer = setInterval(async () => {
+    if (!current) return;
+    try {
+      const { rev } = await fetch(`/api/jobs/${current}/rev`).then((r) => r.json());
+      if (rev && lastRev && rev !== lastRev) { bust = rev; renderPreview(); loadJobs(); toast('Preview updated'); }
+      lastRev = rev || lastRev;
+    } catch {}
+  }, 1200);
+}
 
 // ---- tiny markdown renderer (covers what /guide produces) ----
 function md2html(src, slug) {
   src = src.replace(/^---\n[\s\S]*?\n---\n/, '');                         // strip frontmatter
   const esc = (s) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
   const inline = (s) => esc(s)
-    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, a, u) => `<img alt="${a}" src="${u.startsWith('assets/') ? `/api/jobs/${slug}/asset/${u.slice(7)}` : u}">`)
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, a, u) => `<img alt="${a}" src="${u.startsWith('assets/') ? `/api/jobs/${slug}/asset/${u.slice(7)}?v=${bust}` : u}">`)
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>')
@@ -51,6 +66,7 @@ async function openJob(slug) {
   renderPreview();
   ['save', 'images', 'rerender'].forEach((id) => ($('#' + id).disabled = false));
   loadJobs();
+  startLiveReload();
 }
 
 function renderPreview() { $('#doc').innerHTML = md2html($('#md').value || '', current); }

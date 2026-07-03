@@ -59,6 +59,14 @@ createServer(async (req, res) => {
         slug, job: await readJson(join(dir, 'job.json')), guide: await readJson(join(dir, 'guide.json')),
         md: existsSync(join(dir, 'guide.md')) ? await readFile(join(dir, 'guide.md'), 'utf8') : '', status: await readJson(join(dir, 'status.json')),
       });
+      // live-reload: newest mtime across a job's rendered assets + guide.md (client polls this)
+      if (req.method === 'GET' && sub === '/rev') {
+        let rev = 0;
+        try { for (const f of await readdir(join(dir, 'assets'))) { const s = await stat(join(dir, 'assets', f)); if (s.mtimeMs > rev) rev = s.mtimeMs; } } catch {}
+        try { const s = await stat(join(dir, 'guide.md')); if (s.mtimeMs > rev) rev = s.mtimeMs; } catch {}
+        try { const s = await stat(join(dir, 'status.json')); if (s.mtimeMs > rev) rev = s.mtimeMs; } catch {}
+        return json(res, 200, { rev: Math.round(rev) });
+      }
       if (req.method === 'PUT' && sub === '/md') { await writeFile(join(dir, 'guide.md'), await body(req)); return json(res, 200, { ok: true }); }
       if (req.method === 'PUT' && sub === '/guide') { await writeFile(join(dir, 'guide.json'), await body(req)); return json(res, 200, { ok: true }); }
       if (req.method === 'POST' && sub === '/render') return runWorker(slug, ['--from-guide'], res);   // re-render edited images + md
@@ -75,7 +83,7 @@ createServer(async (req, res) => {
         await rename(dir, join(trash, `${slug}-${stamp}`));
         return json(res, 200, { ok: true });
       }
-      if (sub.startsWith('/asset/')) { const f = join(dir, 'assets', normalize(sub.slice('/asset/'.length))); if (f.startsWith(join(dir, 'assets')) && existsSync(f)) return send(res, 200, MIME['.png'], await readFile(f)); return json(res, 404, {}); }
+      if (sub.startsWith('/asset/')) { const f = join(dir, 'assets', normalize(sub.slice('/asset/'.length))); if (f.startsWith(join(dir, 'assets')) && existsSync(f)) { res.writeHead(200, { 'content-type': MIME['.png'], 'cache-control': 'no-store', 'access-control-allow-origin': '*' }); return res.end(await readFile(f)); } return json(res, 404, {}); }
       return json(res, 404, { error: 'unknown' });
     }
 
