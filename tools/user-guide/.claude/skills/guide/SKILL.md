@@ -24,7 +24,9 @@ You do the work; the user reviews and edits.
    annotation placement by editing `job.json` and re-running.
 7. **Hand off:** tell the user to open **Guide Studio** (`npm run studio`) to review/edit the
    markdown and fine-tune annotations in the image editor, or to approve.
-8. **Publish** to the app's guide site (see below): `node workers/guide-jobs/publish.mjs jobs/<slug>`.
+8. **Publish** to the app's guide site — a confirmed two-step sync (see below): `publish.mjs
+   jobs/<slug>` lands it **locally** (committed, not pushed); `publish.mjs jobs/<slug> --push`
+   takes it **online**.
 
 To **regenerate one step**, edit that step in `job.json` and re-run. Use `--no-capture` to
 re-render/assemble without re-screenshotting (faster when only annotations/prose changed).
@@ -49,14 +51,24 @@ image paths to `/assets/<file>/…`, and converts `> **Tip:**` blockquotes to `<
   }
   ```
 
-- **Run it:** `node workers/guide-jobs/publish.mjs jobs/<slug>` (or `npm run publish jobs/<slug>`).
-  It lands the page + images on a fresh branch `guide/<file>` in the guide repo, **staged but not
-  committed**, then prints review/commit/push/PR commands. Flags: `--dry` (preview, write nothing),
-  `--no-git` (write on the current branch, no branch switch).
+- **Confirmed two-step sync** (`rendered → local → online`). The registry (`apps.config.mjs`)
+  gives each app a `guideRepo` clone and a target `branch` (qsortby → `apps/qsortby/guides` on
+  `toanGuide`). Nothing reaches GitHub without an explicit second command:
 
-- **Onboarding another app:** add one entry to `apps.config.mjs` (`preset`, `devUrl`, `guideRepo`)
-  once its guide repo is cloned under `~/qdnGuides/`. No other changes — the same pipeline publishes
-  to it. Only `qsortby` is wired today.
+  1. **LOCAL** — `node workers/guide-jobs/publish.mjs jobs/<slug>`
+     Writes the `.mdx` + images into the clone, checks out the target branch, and **commits**
+     there (not pushed). Records `jobs/<slug>/publish.json` → `stage: "local"`. Idempotent: if
+     the branch already carries the guide, it just confirms and writes state (no empty commit).
+  2. **Review** — `cd <guideRepo> && npm run dev` → preview at http://localhost:4321.
+  3. **ONLINE** — `node workers/guide-jobs/publish.mjs jobs/<slug> --push`
+     Pushes the branch to `origin/<branch>`. Records `stage: "online"`.
+
+  Check progress any time: `... publish.mjs jobs/<slug> --status`. Other flags: `--dry` (preview,
+  write nothing), `--no-git` (write files on the current branch, no commit/branch switch).
+
+- **Onboarding another app:** add one entry to `apps.config.mjs` (`preset`, `devUrl`, `guideRepo`,
+  `branch`) once its guide repo clone exists. No other changes — the same pipeline publishes to it.
+  Only `qsortby` is wired today.
 
 ## job.json schema
 

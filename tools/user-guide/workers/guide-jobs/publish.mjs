@@ -40,19 +40,32 @@ const flags = new Set(args.filter((a) => a.startsWith('--')));
 const jobArg = args.find((a) => !a.startsWith('--'));
 const DRY = flags.has('--dry');
 const NO_GIT = flags.has('--no-git');
+const PUSH = flags.has('--push');       // gate: go ONLINE (push the local commit to origin/<branch>)
+const STATUS = flags.has('--status');   // just print the pipeline state for this job, then exit
 
-if (!jobArg) die('Usage: node workers/guide-jobs/publish.mjs jobs/<slug> [--no-git] [--dry]');
+if (!jobArg) die('Usage: node workers/guide-jobs/publish.mjs jobs/<slug> [--push] [--status] [--no-git] [--dry]');
 
 const expand = (p) => (p ? p.replace(/^~(?=$|\/)/, os.homedir()) : p);
 function die(msg) { console.error(`\n✗ ${msg}\n`); process.exit(1); }
 function git(cwd, ...a) { return execFileSync('git', a, { cwd, encoding: 'utf8' }).trim(); }
+function gitOk(cwd, ...a) { try { git(cwd, ...a); return true; } catch { return false; } }
+const nowISO = () => new Date().toISOString();
 
 // ---- load job -------------------------------------------------------------
 const jobDir = path.resolve(ROOT, jobArg);
 const jobJsonPath = path.join(jobDir, 'job.json');
 const guideMdPath = path.join(jobDir, 'guide.md');
 if (!fs.existsSync(jobJsonPath)) die(`No job.json at ${jobJsonPath}`);
-if (!fs.existsSync(guideMdPath)) die(`No guide.md at ${guideMdPath} — run the worker first (node workers/guide-jobs/run.mjs ${jobArg}).`);
+if (!STATUS && !fs.existsSync(guideMdPath)) die(`No guide.md at ${guideMdPath} — run the worker first (node workers/guide-jobs/run.mjs ${jobArg}).`);
+
+// ---- publish-state file (jobs/<slug>/publish.json): rendered → local → online
+const stateFile = path.join(jobDir, 'publish.json');
+const readState = () => { try { return JSON.parse(fs.readFileSync(stateFile, 'utf8')); } catch { return {}; } };
+const writeState = (s) => fs.writeFileSync(stateFile, JSON.stringify(s, null, 2) + '\n');
+const isRendered = () => {
+  if (fs.existsSync(guideMdPath)) return true;
+  try { return JSON.parse(fs.readFileSync(path.join(jobDir, 'status.json'), 'utf8')).state === 'ok'; } catch { return false; }
+};
 
 const job = JSON.parse(fs.readFileSync(jobJsonPath, 'utf8'));
 const pub = job.publish;
@@ -80,6 +93,20 @@ const slug = String(pub.file || job.slug).replace(/^\d+[-_.]/, '');
 const section = pub.section || '1-getting-started';
 const order = pub.order ?? 10;
 const draft = pub.draft ?? false;
+const branch = app.branch || `guide/${slug}`;   // registry-configured target branch (e.g. toanGuide)
+
+// ---- `--status`: print the pipeline and exit ------------------------------
+if (STATUS) {
+  const st = readState();
+  const local = st.stage === 'local' || st.stage === 'online';
+  const online = st.stage === 'online';
+  const mark = (on) => (on ? '✓' : '·');
+  console.log(`\n  ${jobArg}  →  ${pub.app} / ${branch}`);
+  console.log(`   [${mark(isRendered())}] rendered   ${isRendered() ? '' : '— run.mjs first'}`);
+  console.log(`   [${mark(local)}] local      ${st.commit ? `commit ${st.commit.slice(0, 7)} · ${st.local_at || ''}` : '— not published locally'}`);
+  console.log(`   [${mark(online)}] online     ${online ? `pushed · ${st.online_at || ''}` : '— not pushed'}\n`);
+  process.exit(0);
+}
 
 // ---- parse guide.md -------------------------------------------------------
 const raw = fs.readFileSync(guideMdPath, 'utf8');
@@ -157,15 +184,18 @@ console.log(`  → images  : ${images.length} → ${rel(assetsOut)}/`);
 
 if (DRY) { console.log('\n--dry: nothing written.\n'); console.log(mdx); process.exit(0); }
 
-// ---- branch (unless --no-git) ---------------------------------------------
-let branch = null;
+console.log(`  → branch  : ${branch}`);
+
+// ---- checkout the target branch (unless --no-git) -------------------------
 if (!NO_GIT) {
   const dirty = git(repo, 'status', '--porcelain');
   if (dirty) console.warn(`⚠ guide repo has uncommitted changes; publishing on top of them.`);
-  branch = `guide/${slug}`;
-  const exists = git(repo, 'branch', '--list', branch);
-  git(repo, 'checkout', ...(exists ? [branch] : ['-b', branch]));
-  console.log(`  → branch  : ${branch}`);
+  const cur = git(repo, 'rev-parse', '--abbrev-ref', 'HEAD');
+  if (cur !== branch) {
+    if (git(repo, 'branch', '--list', branch)) git(repo, 'checkout', branch);
+    else if (gitOk(repo, 'rev-parse', '--verify', `origin/${branch}`)) git(repo, 'checkout', '-b', branch, `origin/${branch}`);
+    else git(repo, 'checkout', '-b', branch);
+  }
 }
 
 // ---- write ----------------------------------------------------------------
@@ -174,20 +204,35 @@ fs.writeFileSync(mdxPath, mdx);
 fs.mkdirSync(assetsOut, { recursive: true });
 for (const img of images) fs.copyFileSync(path.join(srcAssets, img), path.join(assetsOut, img));
 
-// stage, but do NOT commit — leaves a clean review gate
-if (!NO_GIT) {
-  git(repo, 'add', rel(mdxPath), rel(assetsOut));
+if (NO_GIT) {
+  console.log(`\n✓ written on the current branch (no-git). Files are unstaged — commit them yourself.\n`);
+  process.exit(0);
 }
 
-// ---- next steps -----------------------------------------------------------
-console.log(`\n✓ published.\n`);
-console.log(`Review & ship:`);
-console.log(`  cd ${repo}`);
-console.log(`  npm run dev            # preview at http://localhost:4321`);
-if (!NO_GIT) {
-  console.log(`  git diff --staged      # review the change`);
-  console.log(`  git commit -m "guide: ${slug}"`);
-  console.log(`  git push -u origin ${branch}`);
-  console.log(`  gh pr create --fill    # open the PR`);
+// ══ STATE: LOCAL — stage + commit onto <branch> in the local clone ═════════
+git(repo, 'add', rel(mdxPath), rel(assetsOut));
+let state = readState();
+const nothingStaged = gitOk(repo, 'diff', '--cached', '--quiet');  // true ⇒ index clean (ignores untracked)
+if (!nothingStaged) {
+  git(repo, 'commit', '-m', `guide: ${slug}`);
+  const commit = git(repo, 'rev-parse', 'HEAD');
+  state = { slug, app: pub.app, repo, branch, stage: 'local', commit, message: `guide: ${slug}`, local_at: nowISO(), online_at: null };
+  writeState(state);
+  console.log(`\n✓ LOCAL — committed ${commit.slice(0, 7)} onto ${branch} (not pushed).`);
+} else {
+  console.log(`\n✓ LOCAL — no changes; ${branch} already carries this guide.`);
+  if (state.stage !== 'online') { state = { ...state, slug, app: pub.app, repo, branch, stage: 'local', commit: git(repo, 'rev-parse', 'HEAD'), local_at: state.local_at || nowISO(), online_at: null }; writeState(state); }
 }
-console.log('');
+
+// ══ STATE: ONLINE — gated behind --push ════════════════════════════════════
+if (PUSH) {
+  git(repo, 'push', '-u', 'origin', branch);
+  state.stage = 'online'; state.online_at = nowISO(); writeState(state);
+  console.log(`\n✓ ONLINE — pushed ${branch} → origin/${branch}.`);
+  console.log(`   https://github.com/qdndigital/qsortby-guide/tree/${branch}\n`);
+} else {
+  console.log(`\n  Review it, then go online when ready:`);
+  console.log(`    cd ${repo} && npm run dev       # preview at http://localhost:4321`);
+  console.log(`    node workers/guide-jobs/publish.mjs ${jobArg} --push   # → origin/${branch}`);
+  console.log(`  Check state any time:  node workers/guide-jobs/publish.mjs ${jobArg} --status\n`);
+}

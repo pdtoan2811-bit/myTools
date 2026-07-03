@@ -16,8 +16,12 @@ export default {
   apps: {
     qsortby: {
       preset: 'qsortby',                  // must match `site.preset` in the guide repo's src/config.ts
-      devUrl: 'http://localhost:55166',   // where the app runs for capture (a job.json baseUrl overrides this)
-      guideRepo: '~/qdnGuides/qsortby-guide',
+      // Capture target: the mocked-UI fork ~/qdnQsense (pdtoan2811-bit/qsortby),
+      // which serves the /preview/* routes. Launch it on this port first:
+      //   cd ~/qdnQsense && PORT=55166 npm run preview
+      devUrl: 'http://localhost:55166',   // (a job.json baseUrl overrides this)
+      guideRepo: '~/qdn/apps/qsortby/guides',  // the tracked workspace clone of qdndigital/qsortby-guide
+      branch: 'toanGuide',                     // publish/sync target branch (local → online)
       homeUrl: 'https://qsortby.com',
     },
 

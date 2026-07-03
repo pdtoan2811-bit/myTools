@@ -28,6 +28,7 @@ exports/
 **/jobs/*/guide.json
 **/jobs/*/guide.md
 **/jobs/*/status.json
+**/jobs/*/publish.json
 
 # ── Secrets & OS cruft ────────────────────────────────────────────────────────
 .env
